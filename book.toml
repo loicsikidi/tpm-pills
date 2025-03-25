@@ -1,0 +1,16 @@
+[book]
+title = "TPM Pills"
+authors = ["Loïc Sikidi"]
+language = "en"
+multilingual = false
+src = "pills"
+
+[output.html]
+additional-css = ["custom.css"]
+git-repository-url = "https://github.com/loicsikidi/tpm-pills"
+
+[output.linkcheck]
+follow-web-links = true
+
+# To build the epub version, run:
+# mdbook-epub --standalone true
