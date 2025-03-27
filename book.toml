@@ -10,7 +10,7 @@ additional-css = ["custom.css"]
 git-repository-url = "https://github.com/loicsikidi/tpm-pills"
 
 [output.linkcheck]
-follow-web-links = false
+follow-web-links = true
 
 # To build the epub version, run:
 # mdbook-epub --standalone true
