@@ -10,7 +10,7 @@ with pkgs; {
       runHook preBuild
 
       # We can't check external links inside the sandbox, but it's good to check them outside the sandbox.
-      # substituteInPlace book.toml --replace-fail 'follow-web-links = true' 'follow-web-links = false'
+      substituteInPlace book.toml --replace-fail 'follow-web-links = true' 'follow-web-links = false'
       mdbook build
 
       runHook postBuild
