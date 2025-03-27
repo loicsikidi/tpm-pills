@@ -7,7 +7,6 @@ let
     config = { };
     overlays = [ ];
   };
-
 in pkgs.mkShellNoCC {
   packages = with pkgs; [
     mdbook
@@ -28,7 +27,4 @@ in pkgs.mkShellNoCC {
 
   C_INCLUDE_PATH = "${pkgs.openssl.dev}/include";
   LIBRARY_PATH = "${pkgs.openssl.dev}/lib";
-  # shellHook = ''
-  #   export MACOSX_DEPLOYMENT_TARGET=$(sw_vers -productVersion)
-  # '';
 }
