@@ -6,7 +6,8 @@
     "tpm2-tools": {
       "version":            "5.7",
       "excluded_platforms": ["x86_64-darwin", "aarch64-darwin"]
-    }
+    },
+    "swtpm": "0.10.0"
   },
   "shell": {
     "init_hook": [

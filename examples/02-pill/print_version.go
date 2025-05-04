@@ -5,28 +5,14 @@ package main
 import (
 	"fmt"
 	"log"
-	"runtime"
 
-	"github.com/google/go-tpm/tpm2/transport"
-	"github.com/google/go-tpm/tpm2/transport/linuxtpm"
-	"github.com/google/go-tpm/tpm2/transport/simulator"
+	"github.com/loicsikidi/tpm-pills/internal/tpmutil"
 )
 
 func main() {
-	var (
-		tpm    transport.TPMCloser
-		errTpm error
-	)
-	switch runtime.GOOS {
-	case "linux":
-		tpm, errTpm = linuxtpm.Open("/dev/tpmrm0")
-	case "darwin":
-		tpm, errTpm = simulator.OpenSimulator()
-	default:
-		log.Fatalf("unsupported platform: %s", runtime.GOOS)
-	}
-	if errTpm != nil {
-		log.Fatalf("can't open tpm: %v", errTpm)
+	tpm, err := tpmutil.OpenTPM("")
+	if err != nil {
+		log.Fatalf("can't open tpm: %v", err)
 	}
 	defer tpm.Close()
 

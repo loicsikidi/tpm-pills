@@ -6,13 +6,17 @@ What is a TPM (Trusted Platform Module)? It's a secure cryptoprocessor — *a pi
 
 Where a TPM shines is in its ubiquity! Indeed, it can be found almost everywhere: PCs, servers, network gear, an increasing number of embedded systems, and even in the cloud. Therefore, it's very likely that you can already take advantage of it without spending a dime.
 
-> *For example, if you have developed the bad habit of storing your SSH key pairs in plaintext (i.e. *`~/.ssh/`*), be aware that you can generate them with a TPM to protect yourself from data theft if your *filesystem* is compromised.*
+> For example, if you have developed the bad habit of storing your SSH key pairs in plaintext (i.e. *`~/.ssh/`*), be aware that you can generate them with a TPM to protect yourself from data theft if your *filesystem* is compromised.
 >
 > <div class="info">
+> <b>Tip</b>
+>
 > If you want to learn how: take a look at <a href="https://github.com/Foxboron/ssh-tpm-agent" target="_blank">ssh-tpm-agent</a> repo and its <a href="https://linderud.dev/blog/store-ssh-keys-inside-the-tpm-ssh-tpm-agent/" target="_blank">companion blog post</a>.
 ></div>
 
-This functionality (highly important as it is) is actually just the tip of the iceberg. The TPM standard aims to address a *root of trust* issue through the principle of ***Hardware Root of Trust*** (HRoT). This standard operates on the premise that it is safer to base certain low-level functions on *hardware* rather than *software*. For example, this concept can be applied during a machine's *boot* process, where measurements are transmitted to the TPM to verify its integrity[^3].
+This functionality (highly important as it is) is actually just the tip of the iceberg. The TPM standard aims to address a *root of trust* issue through the principle of ***Hardware Root of Trust*** (HRoT). This standard operates on the premise that it is safer to base certain low-level functions on *hardware* rather than *software*.
+
+For example, this concept can be applied during a machine's *boot* process, where measurements are transmitted to the TPM to verify its integrity[^3].
 
 ![](./images/01-pill/boot.png)
 
@@ -27,6 +31,14 @@ Fortunately for us, the TPM elegantly solves this problem by providing the encry
 This type of principle is used, for example, by [BitLocker](https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/) or systemd (i.e.  [systemd-cryptenroll](https://www.freedesktop.org/software/systemd/man/latest/systemd-cryptenroll.html)).  
 
 It is even possible to combine these two concepts and ensure that the `unseal` mechanism is only allowed **if the machine is in a trusted state**, thanks to integrity measurements. We will explore this in more depth in the upcoming *pills*, but this already gives you a glimpse of the vast capabilities provided by a TPM.
+
+<div class="info">
+<b>Who produced the TPM specification?</b>
+
+The spec has been produced and is maintained by a consortium called <code class="hljs">Trusted Computing Group (TCG)</code>. 
+
+TCG has also produced other specs that revolve around TPMs.
+</div>
 
 ## Different kinds of TPM
 
@@ -53,9 +65,11 @@ You need to have in mind that there are different kinds of TPMs, each with its o
 In this brief introduction, my goal was to present the key features that make the TPM an essential component for establishing a paradigm focused on security. It is also in this spirit that Microsoft requires a **TPM 2.0** to install Windows 11[^5] [^6] on a machine.
 
 <div class="warning">
+<b>Important</b>
+
 Up until now, this is the first time I mention <code class="hljs">TPM 2.0</code>. <code class="hljs">TPM 2.0</code> is simply the version that follows <code class="hljs">TPM 1.2</code>. Just consider that the second iteration was designed to address several issues and that it is now <em>de facto</em> the industry standard.
 
-<b>Important note: every time I use the term TPM, I always refer to TPM 2.0</b>.
+<b><em>note: every time I use the term TPM, I always refer to TPM 2.0</em></b>.
 
 If you're interested in the differences between <code class="hljs">TPM 1.2</code> and <code class="hljs">TPM 2.0</code>, I recommend you to read this <a href="https://learn.microsoft.com/en-us/windows/security/hardware-security/tpm/tpm-recommendations#tpm-12-vs-20-comparison" target="_blank">documentation</a> provided by Microsoft.
 </div>
@@ -73,12 +87,14 @@ For the sake of impartiality, I must highlight the drawbacks inherent in using a
 Contrary to Microsoft and Linux, Apple made the decision to use a proprietary solution called [Secure Enclave](https://support.apple.com/guide/security/sec59b0b31ff/web).
 
 <div class="info">
+<b>Tip</b>
+
 If you are a macOS user, you can still stay with us because most of the exemples will use a Software TPM which you will be able to run on your machine.
 </div>
 
 ## Next pill...
 
-...we will setup a minimal environment to interact with a TPM. We will also explore the tools available to interact with it.
+...we will setup a minimal environment to interact with a TPM in your running system.
 
 ---
 
