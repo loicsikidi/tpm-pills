@@ -4,11 +4,11 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/google/go-tpm/tpm2/transport/simulator"
+	"github.com/loicsikidi/tpm-pills/internal/tpmutil"
 )
 
 func TestGetTpmVersion(t *testing.T) {
-	tpm, err := simulator.OpenSimulator()
+	tpm, err := tpmutil.OpenTPM(tpmutil.TPM_SIMULATOR)
 	if err != nil {
 		t.Fatalf("can't open tpm: %v", err)
 	}

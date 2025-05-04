@@ -7,6 +7,8 @@ The goal here is to prepare your environment to run the examples provided in `TP
 So far, my experience with TPMs has been exclusively limited to a **Linux** context — this is why, I am open to [feedback](https://github.com/loicsikidi/tpm-pills/issues) from Windows users, if they encounter any issues.  
 
 <div class="warning">
+<b>Warning</b>
+
 Unfortunately, according to <a href="https://github.com/microsoft/WSL/issues/5178" target="_blank">this issue</a>, TPM is not added to WSL (<em>Windows Subsystem for Linux</em>), so it will be necessary to run commands from the host machine.
 </div>
 
@@ -17,12 +19,13 @@ Unfortunately, according to <a href="https://github.com/microsoft/WSL/issues/517
 | Tool | Description | Linux Support | Windows Support | MacOS Support |  
 | ---- | ----------- | :-----------: | :-------------: | :-----------: |  
 |  **[go](https://go.dev/)** >= `v1.22` | A language that no longer needs an introduction | ✅ | ✅ | ✅ |  
-|  **[openssl](https://github.com/openssl/openssl)** | Crypto *Swiss Army Knife* which here is a dependency for using the Software TPM | ✅ | ✅ | ✅ |  
+|  **[openssl](https://github.com/openssl/openssl)** | Crypto *Swiss Army Knife* which here is a dependency for using the Software TPM | ✅ | ✅ | ✅ |
+|  **[swtpm](https://github.com/stefanberger/swtpm)** | A Software TPM Emulator | ✅ |  ✅ <br><br> ([using Cygwin](https://github.com/stefanberger/swtpm/wiki#compile-and-install-on-cygwin)) |  ✅ |  
 |  **[tpm2-tools](https://github.com/tpm2-software/tpm2-tools)** | A CLI (*Command-Line Interface*) for interacting with a TPM | ✅ | ❌ | ❌ |  
 
 `tpm2-tools` is a great tool to have in your *toolbox*! However, since it is not available everywhere, it will be used sparingly.  
 
-> `PowerShell` provides some [commands](https://learn.microsoft.com/en-us/powershell/module/trustedplatformmodule) to interact with a TPM, but they will not be covered here.  
+> *Note: `PowerShell` provides some [commands](https://learn.microsoft.com/en-us/powershell/module/trustedplatformmodule) to interact with a TPM, but they will not be covered here.* 
 
 ### Why `go`?  
 
@@ -41,11 +44,11 @@ Fundamentally, since the `TPM 2.0` interface is a standard, all the concepts we 
 
 For those interested, here is a (probably non-exhaustive) list of TPM 2.0 clients.  
 
-> My usage has been only limited to **tpm-tss** and **go-tpm**.
-
 | Name | Language | Description |
 | ---- | -------- | ----------- |
-| [tpm2-tss](https://github.com/tpm2-software/tpm2-tss) | C | The standard meter bar. |
+| [tpm2-tss](https://github.com/tpm2-software/tpm2-tss) | C | Intel implementation of TCG's TPM Software Stack (TSS). The current standard meter bar regarding TPM libraries. |
+| [ibmtss](https://github.com/kgoldman/ibmtss) | C | IBM implementation of TPM Software Stack (TSS) but not API compatible with TCG TSS. |
+| [wolfTPM](https://github.com/wolfSSL/wolfTPM) | C | TPM 2.0 librairy designed for embedded system. |
 | [go-tpm](https://github.com/google/go-tpm) | golang | |
 | [tpm2-pytss](https://github.com/tpm2-software/tpm2-pytss) | python | Wrapper of `tpm2-tss`. |
 | [tpm-rs](https://github.com/tpm-rs/tpm-rs)| rust | |
@@ -75,11 +78,13 @@ go version
 tpm2 --version
 ```
 
-> With this method *tpm2-tools* will only be installed on a Linux platform.  
+> *Note: with this method `tpm2-tools` will only be installed on a Linux platform.*
 
 ### Devbox  
 
 <div class="info">
+<b>Info</b>
+
  For those who are unfamiliar, <a href="https://github.com/jetify-com/devbox" target="_blank">Devbox</a> is a layer on top of <b>Nix</b> that allows you to obtain a deterministic shell without having to master Nix language.
 </div>
   
@@ -98,25 +103,30 @@ go version
 tpm2 --version
 ```
 
-> With this method *tpm2-tools* will only be installed on a Linux platform.  
+> *Note: with this method `tpm2-tools` will only be installed on a Linux platform.*
 
 ### Manually  
 
 * **go**: Use your preferred *package manager* or download the binary from the [official website](https://go.dev/doc/install)  
 * **openssl**: Use your preferred *package manager* or get the sources from the [official website](https://openssl-library.org/source/)
-* **tpm2-tools**: Use your preferred *package manager* or build the sources by following the [official documentation](https://tpm2-tools.readthedocs.io/en/latest/INSTALL/) 
+* **swtpm**: Use your preferred package manager or build the sources by following the [official documentation](https://github.com/stefanberger/swtpm/wiki)
+* **tpm2-tools**: Use your preferred *package manager* or build the sources by following the [official documentation](https://tpm2-tools.readthedocs.io/en/latest/INSTALL/)
 
-## Example: Validate TPM's Version  
+## Example: Validate TPM's version  
 
 Let’s finally get to the serious stuff! We will check the version of the TPM installed on your machine and ensure that it is a `TPM 2.0`. We will able to do this by interacting directly with the TPM using a command called `TPM2_GetCapability`.
 
 <div class="info">
+<b>Info</b>
+
 On Linux, access to the Hardware TPM is secured by <b>sudo</b> rights. It is possible to have finer control using a <code class="hljs">udev</code> policy to allow specific users or groups to access it (e.g., the policy available in <a href="https://github.com/NixOS/nixpkgs/blob/88a55dffa4d44d294c74c298daf75824dc0aafb5/nixos/modules/security/tpm2.nix#L10-L21" target="_blank">NixOS</a>).
 </div>
 
 ### tpm2-tools  
 
 <div class="warning">
+<b>Warning</b>
+
 <em>Only works on Linux.</em>
 </div>
 

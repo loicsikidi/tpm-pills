@@ -18,6 +18,8 @@ in pkgs.mkShellNoCC {
     gcc
     openssl
 
+    swtpm
+    
     # we install tpm2-tools only in supported platforms (i.e. linux)
     (lib.optional (lib.elem stdenv.system tpm2-tools.meta.platforms) tpm2-tools)
   ];

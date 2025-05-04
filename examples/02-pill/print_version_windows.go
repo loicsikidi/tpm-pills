@@ -6,11 +6,11 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/google/go-tpm/tpm2/transport/windowstpm"
+	"github.com/loicsikidi/tpm-pills/internal/tpmutil"
 )
 
 func main() {
-	tpm, err := windowstpm.Open()
+	tpm, err := tpmutil.OpenTPM(tpmutil.WINDOWS)
 	if err != nil {
 		log.Fatalf("can't open tpm: %v", err)
 	}

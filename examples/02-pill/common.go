@@ -8,7 +8,7 @@ import (
 	"github.com/google/go-tpm/tpm2/transport"
 )
 
-func getTpmVersion(tpm transport.TPMCloser) ([]byte, error) {
+func getTpmVersion(tpm transport.TPM) ([]byte, error) {
 	getCapCmd := tpm2.GetCapability{
 		Capability:    tpm2.TPMCapTPMProperties,
 		Property:      uint32(tpm2.TPMPTFamilyIndicator),
