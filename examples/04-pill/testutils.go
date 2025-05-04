@@ -11,7 +11,7 @@ import (
 
 // setupCreatePrimary sets up the primary key creation and returns the response and a cleanup function.
 func setupCreatePrimary(t *testing.T, tpm transport.TPM, public tpm2.TPM2BPublic) (*tpm2.CreatePrimaryResponse, func()) {
-	createPrimaryRsp, err, closer := createPrimary(tpm, public)
+	createPrimaryRsp, closer, err := createPrimary(tpm, public)
 	require.NoError(t, err, "CreatePrimary() failed")
 
 	return createPrimaryRsp, closer

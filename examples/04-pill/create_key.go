@@ -86,7 +86,7 @@ func createOrdinaryKey(tpm transport.TPM, outDir string) error {
 			outDir = dir
 		}
 	}
-	primary, err, primaryCloser := createPrimary(tpm, ECCStorageParentTemplate)
+	primary, primaryCloser, err := createPrimary(tpm, ECCStorageParentTemplate)
 	if err != nil {
 		return fmt.Errorf("failed to create primary key failed: %w", err)
 	}
@@ -120,7 +120,7 @@ func loadOrdinaryKey(tpm transport.TPM, pubPath, privPath string) error {
 		return fmt.Errorf("failed to get public and private keys: %w", err)
 	}
 
-	primary, err, primaryCloser := createPrimary(tpm, ECCStorageParentTemplate)
+	primary, primaryCloser, err := createPrimary(tpm, ECCStorageParentTemplate)
 	if err != nil {
 		return fmt.Errorf("failed to create primary key failed: %w", err)
 	}

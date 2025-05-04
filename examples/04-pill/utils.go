@@ -67,7 +67,7 @@ var (
 )
 
 // createPrimary creates a primary key in the TPM and returns the response and a cleanup function.
-func createPrimary(tpm transport.TPM, public tpm2.TPM2BPublic) (*tpm2.CreatePrimaryResponse, error, func()) {
+func createPrimary(tpm transport.TPM, public tpm2.TPM2BPublic) (*tpm2.CreatePrimaryResponse, func(), error) {
 	createPrimaryCmd := tpm2.CreatePrimary{
 		PrimaryHandle: tpm2.TPMRHOwner,
 		InPublic:      public,
@@ -75,12 +75,11 @@ func createPrimary(tpm transport.TPM, public tpm2.TPM2BPublic) (*tpm2.CreatePrim
 	createPrimaryRsp, err := createPrimaryCmd.Execute(tpm)
 	if err == nil {
 		flushContext := tpm2.FlushContext{FlushHandle: createPrimaryRsp.ObjectHandle}
-		return createPrimaryRsp, nil, func() {
+		return createPrimaryRsp, func() {
 			flushContext.Execute(tpm)
-
-		}
+		}, nil
 	}
-	return nil, err, func() {}
+	return nil, func() {}, err
 }
 
 // getECCPub extracts the ECC public key from TPM2B_PUBLIC structure.
