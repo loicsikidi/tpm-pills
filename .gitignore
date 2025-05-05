@@ -4,3 +4,4 @@ result-*
 book/*
 .direnv/
 *.drawio.bkp
+.pre-commit-config.yaml
