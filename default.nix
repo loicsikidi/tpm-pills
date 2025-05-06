@@ -1,4 +1,4 @@
-{ pkgs ? import <nixpkgs> { } }:
+{ pkgs ? import <nixpkgs> { }, }:
 let
   nix-pre-commit-hooks = import (builtins.fetchTarball
     "https://github.com/cachix/git-hooks.nix/tarball/master");
@@ -40,12 +40,18 @@ in with pkgs; {
       nixfmt-classic.enable = true;
       # golang
       gofmt.enable = true;
-      golangci-lint.enable = true;
-      golangci-lint.package = pkgs.golangci-lint;
-      golangci-lint.extraPackages = with pkgs; [ go openssl ];
-      gotest.enable = true;
-      gotest.package = pkgs.go;
-      gotest.extraPackages = with pkgs; [ openssl gcc ];
+      golangci-lint = {
+        enable = true;
+        package = pkgs.golangci-lint;
+        extraPackages = with pkgs; [ go openssl ];
+        stages = [ "pre-push" ]; # because it takes a while
+      };
+      gotest = {
+        enable = true;
+        package = pkgs.go;
+        extraPackages = with pkgs; [ openssl gcc ];
+        stages = [ "pre-push" ]; # because it takes a while
+      };
     };
   };
 }
