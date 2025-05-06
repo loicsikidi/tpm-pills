@@ -37,7 +37,3 @@ go run github.com/loicsikidi/tpm-pills/examples/04-pill cleanup
 # Run the tests
 go test github.com/loicsikidi/tpm-pills/examples/04-pill
 ```
-
-
-
-

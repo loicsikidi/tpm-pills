@@ -7,6 +7,7 @@ let
     config = { };
     overlays = [ ];
   };
+  pre-commit = import ./default.nix { };
 in pkgs.mkShellNoCC {
   packages = with pkgs; [
     mdbook
@@ -15,11 +16,13 @@ in pkgs.mkShellNoCC {
     go # v1.23.5
     delve # v1.24.0
 
+    # required to run TPM simulator
+    # source: https://github.com/google/go-tpm-tools/tree/main/simulator
     gcc
     openssl
 
     swtpm
-    
+
     # we install tpm2-tools only in supported platforms (i.e. linux)
     (lib.optional (lib.elem stdenv.system tpm2-tools.meta.platforms) tpm2-tools)
   ];
@@ -27,6 +30,8 @@ in pkgs.mkShellNoCC {
   # fix found here: https://github.com/NixOS/nixpkgs/issues/18995#issuecomment-249748307
   hardeningDisable = [ "fortify" ];
 
-  C_INCLUDE_PATH = "${pkgs.openssl.dev}/include";
-  LIBRARY_PATH = "${pkgs.openssl.dev}/lib";
+  shellHook = ''
+    ${pre-commit.pre-commit-check.shellHook}
+  '';
+  buildInputs = pre-commit.pre-commit-check.enabledPackages;
 }
