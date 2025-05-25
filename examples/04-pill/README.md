@@ -35,5 +35,5 @@ go run github.com/loicsikidi/tpm-pills/examples/04-pill cleanup
 
 ```bash
 # Run the tests
-go test github.com/loicsikidi/tpm-pills/examples/04-pill
+go test -v github.com/loicsikidi/tpm-pills/examples/04-pill
 ```

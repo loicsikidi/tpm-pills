@@ -1,6 +1,6 @@
 # TPM Pills
 
-Content and examples for [TPM Pills](https://tpmpills.com), a site that introductes *Trusted Platform Modules* (TPM) with a series of short articles.
+Content and examples for [TPM Pills](https://tpmpills.com), a site that introduces *Trusted Platform Modules* (TPM) with a series of short articles.
 
 ## Building
 

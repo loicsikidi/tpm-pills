@@ -31,7 +31,7 @@ This model directly maps to how a TPM organizes its keys, which are divided into
 This parent/child distinction explains why two separate commands exist for key creation:
 
 * `TPM2_CreatePrimary`: creates a primary key
-* `TPM2_Create`: creates an ordinary key, which requires a reference to a parent key
+* `TPM2_Create`: creates an ordinary key (which requires a reference to a parent key)
 
 Moreover, all keys belong to a specific *tenant* referred to as a **hierarchy** in the TPM specification[^1] which I admit can be confusing. Each `TPM 2.0` implementation provides exactly four fixed *tenants/hierarchies*, which can be disabled if needed[^2]. 
 
@@ -41,19 +41,19 @@ The spec assumes a TPM may be used in different contexts, so fine-grained access
 
 Below is a full list of hierarchies:
 
-| Name | Purpose (according to the spec) | Type |
-| ---- | ------------------------------- | ---- |
-| Storage or Owner hierarchy | Intended for non-privacy-sentive operations by the platform owner (.e.g., an IT department, the end user).  | Persisted | 
+| Name | Purpose | Type |
+| ---- | ------- | ---- |
+| Storage or Owner hierarchy | Intended for non-privacy-sentive operations by the platform owner (e.g., an IT department, the end user).  | Persisted | 
 | Platform hierarchy | Intended to be under the control of the platform manufacturer[^3] for early boot tasks (e.g., BIOS, UEFI). In other words, it's not meant to be used by the end user. | Persisted |
 | Endorsement hierarchy | Intended for privacy-sentive operations when the user or an organization has privacy concerns.  | Persisted |
-| Null hierarchy | Intended to store ephemeral objects (e.g. sessions, context etc.) used internally by the TPM. The end user can use this hierarchy to use ephemeral keys that will be erased at reboot. | Volatile |
+| Null hierarchy | Intended to store ephemeral objects (e.g. sessions, context, etc.) used internally by the TPM. The end user can use this hierarchy to use ephemeral keys that will be erased at reboot. | Volatile |
 
 <div class="info">
 <b>What does "privacy" means in the TPM specification?</b>
 
 <code class="hljs">Privacy</code> refers to mecanisms which prevent a third party from correlating or identifying that multiple keys originate from the same TPM.
 
-<em>Note: in enterprise contexts, the opposite may be desirable for auditing and control purposes.</em>
+<em>Note: in a enterprise context, the opposite may be desirable for auditing and control purposes.</em>
 </div>
 
 The diagram below summarizes the key ideas we've just covered:
@@ -70,7 +70,7 @@ Exceptionally, you may need to use the <code class="hljs">Null</code> hierarchy 
 
 ### Reproducibility
 
-Reproducibility is a fundamental *primitive* in TPM behavior. Specifically, a TPM can regenerate a Primary Key **bit-for-bit**, eliminating the need for backups—at least for this kind of keys.
+Reproducibility is a **fundamental primitive** in a TPM. Indeed, the latter can regenerate a Primary Key **bit-for-bit**, eliminating the need for backups — at least for this kind of keys.
 
 *How does this work?*
 
@@ -82,7 +82,7 @@ We can express this as the following equation:
 
 Since the *seed* is typically stable, the TPM can deterministically reproduce the key whenever needed.
 
-> *Note: given the high entropy of seeds, it’s extremely unlikely that two TPMs will generate the same key by chance.*
+> *Note: given the high entropy of seeds, it’s extremely unlikely that two TPMs will generate the same key.*
 
 #### Persisted vs. Volatile Hierarchies
 
@@ -94,7 +94,7 @@ Earlier, we distinguished between persisted and volatile hierarchies. Now that t
 <div class="warning">
 <b>Warning</b>
 
-With sufficient privileges, it's possible to force a seed rotation for any persisted hierarchy—but this will invalidate all previously created keys.
+With sufficient privileges, it's possible to force a seed rotation for any persisted hierarchy — but this will invalidate all previously created keys.
 
 Use this operation with caution.
 </div>
@@ -264,7 +264,10 @@ Depending on your setup, you can run the following terminal commands:
 go run github.com/loicsikidi/tpm-pills/examples/04-pill create
 # output: Ordinary key created successfully 🚀
 
-# OPTIONAL: print public object
+# list created files
+ls -l tpmkey.*
+
+# OPTIONAL: use tpm2-tools to print public object
 tpm2 print -t TPM2B_PUBLIC ./tpmkey.pub
 
 # Load the key in the TPM
@@ -272,9 +275,12 @@ go run github.com/loicsikidi/tpm-pills/examples/04-pill load --public ./tpmkey.p
 # output: Ordinary key loaded successfully 🚀
 
 # Clean up
-# Note: the command wll remove swtpm state
+# Note: the command will remove swtpm state
 go run github.com/loicsikidi/tpm-pills/examples/04-pill cleanup
 # output: State cleaned successfully 🚀
+
+# remove created files
+rm ./tpmkey.pub ./tpmkey.priv
 ```
 
 > *Note: by default, the example uses [swtpm](https://github.com/stefanberger/swtpm) as a TPM simulator. If you want to use a real TPM, you can specify the `--use-real-tpm` flag.*

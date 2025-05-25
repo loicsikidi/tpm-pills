@@ -112,7 +112,7 @@ tpm2 --version
 * **swtpm**: Use your preferred package manager or build the sources by following the [official documentation](https://github.com/stefanberger/swtpm/wiki)
 * **tpm2-tools**: Use your preferred *package manager* or build the sources by following the [official documentation](https://tpm2-tools.readthedocs.io/en/latest/INSTALL/)
 
-## Example: Validate TPM's version  
+## Example: validate TPM's version  
 
 Let’s finally get to the serious stuff! We will check the version of the TPM installed on your machine and ensure that it is a `TPM 2.0`. We will able to do this by interacting directly with the TPM using a command called `TPM2_GetCapability`.
 
