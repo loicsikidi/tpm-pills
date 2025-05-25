@@ -7,6 +7,7 @@ import (
 
 	"github.com/google/go-tpm/tpm2"
 	"github.com/google/go-tpm/tpm2/transport/simulator"
+	"github.com/loicsikidi/tpm-pills/internal/tpmutil"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -19,14 +20,14 @@ func TestReproductability(t *testing.T) {
 	}
 	defer tpm.Close()
 
-	firstPrimary, closer := setupCreatePrimary(t, tpm, ECCSignerTemplate)
+	firstPrimary, closer := setupCreatePrimary(t, tpm, tpmutil.ECCP256SignerTemplate)
 	defer closer()
 
-	secondPrimary, secondCloser := setupCreatePrimary(t, tpm, ECCSignerTemplate)
+	secondPrimary, secondCloser := setupCreatePrimary(t, tpm, tpmutil.ECCP256SignerTemplate)
 	defer secondCloser()
 
-	firstEccPub := mustGetEccPub(t, firstPrimary)
-	secondEccPub := mustGetEccPub(t, secondPrimary)
+	firstEccPub := mustPublicKey(t, firstPrimary)
+	secondEccPub := mustPublicKey(t, secondPrimary)
 
 	require.Equal(t, firstEccPub, secondEccPub, "Public keys doesn't match")
 	require.True(t, bytes.Equal(firstPrimary.Name.Buffer, secondPrimary.Name.Buffer), "Object Name doesn't match")
@@ -41,7 +42,8 @@ func TestCreate(t *testing.T) {
 	}
 	defer tpm.Close()
 
-	signerPrimary, closer := setupCreatePrimary(t, tpm, ECCSignerTemplate)
+	// not allowed to create keys
+	signerPrimary, closer := setupCreatePrimary(t, tpm, tpmutil.ECCP256SignerTemplate)
 	defer closer()
 
 	createCmd := tpm2.Create{
@@ -49,13 +51,14 @@ func TestCreate(t *testing.T) {
 			Name:   signerPrimary.Name,
 			Handle: signerPrimary.ObjectHandle,
 		},
-		InPublic: ECCSignerTemplate,
+		InPublic: tpmutil.ECCP256SignerTemplate,
 	}
 
 	_, err = createCmd.Execute(tpm)
 	assert.Error(t, err, "Non-Storage Parent should not be able to create keys")
 
-	storageParentPrimary, storageParentCloser := setupCreatePrimary(t, tpm, ECCStorageParentTemplate)
+	// allowed to create keys
+	storageParentPrimary, storageParentCloser := setupCreatePrimary(t, tpm, tpmutil.ECCP256StorageParentTemplate)
 	defer storageParentCloser()
 
 	createCmd.ParentHandle = tpm2.NamedHandle{
