@@ -23,6 +23,8 @@ Unfortunately, according to <a href="https://github.com/microsoft/WSL/issues/517
 |  **[swtpm](https://github.com/stefanberger/swtpm)** | A Software TPM Emulator | ✅ |  ✅ <br><br> ([using Cygwin](https://github.com/stefanberger/swtpm/wiki#compile-and-install-on-cygwin)) |  ✅ |  
 |  **[tpm2-tools](https://github.com/tpm2-software/tpm2-tools)** | A CLI (*Command-Line Interface*) for interacting with a TPM | ✅ | ❌ | ❌ |  
 
+<p align="center"><b>Table: </b><em>Tooling support per Operating System</em></p>
+
 `tpm2-tools` is a great tool to have in your *toolbox*! However, since it is not available everywhere, it will be used sparingly.  
 
 > *Note: `PowerShell` provides some [commands](https://learn.microsoft.com/en-us/powershell/module/trustedplatformmodule) to interact with a TPM, but they will not be covered here.* 
@@ -54,6 +56,8 @@ For those interested, here is a (probably non-exhaustive) list of TPM 2.0 client
 | [tpm-rs](https://github.com/tpm-rs/tpm-rs)| rust | |
 | [rust-tss-fapi](https://github.com/tpm2-software/rust-tss-fapi)| rust | Wrapper of `libtss2-fapi` which is an upper API provided by `tpm2-tss` named FAPI[^1]. <br><br>***Warning**: project's maintainers underline that the implementation is experimental and shouldn't be use in production*. |
 | [TSS.MSR](https://github.com/microsoft/TSS.MSR)| c#, c++, java, nodejs and python | |
+
+<p align="center"><b>Table: </b><em>TPM libraries</em></p>
 
 ## Installation  
 
