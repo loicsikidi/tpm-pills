@@ -60,6 +60,8 @@ You need to have in mind that there are different kinds of TPMs, each with its o
 | Software TPM | N/A | N/A |   Free   | Testing and prototyping |
 | Virtual TPM | High | Hypervisor | Cheap  | Cloud environment |
 
+<p align="center"><b>Table: </b><em>TPM classification</em></p>
+
 ## Conclusion
 
 In this brief introduction, my goal was to present the key features that make the TPM an essential component for establishing a paradigm focused on security. It is also in this spirit that Microsoft requires a **TPM 2.0** to install Windows 11[^5] [^6] on a machine.
