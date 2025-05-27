@@ -1,13 +1,17 @@
-{ pkgs ? import <nixpkgs> { }, }:
+{ pkgs ? import <nixpkgs> { }, domain ? "" }:
 let
-  nix-pre-commit-hooks = import (builtins.fetchTarball
-    "https://github.com/cachix/git-hooks.nix/tarball/master");
+  mdbook-sitemap-generator =
+    pkgs.callPackage ./nix/pkgs/mdbook-sitemap-generator.nix { };
+  defaultInputs = [ pkgs.mdbook pkgs.mdbook-linkcheck ];
+  conditionalElement =
+    if domain != "" then [ mdbook-sitemap-generator ] else [ ];
+  nativeBuildInputs = defaultInputs ++ conditionalElement;
 in with pkgs; {
   html-split = stdenvNoCC.mkDerivation {
     name = "tpm-pills";
     src = lib.cleanSource ./.;
 
-    nativeBuildInputs = [ mdbook mdbook-linkcheck ];
+    nativeBuildInputs = nativeBuildInputs;
 
     buildPhase = ''
       runHook preBuild
@@ -15,6 +19,13 @@ in with pkgs; {
       # We can't check external links inside the sandbox, but it's good to check them outside the sandbox.
       substituteInPlace book.toml --replace-fail 'follow-web-links = true' 'follow-web-links = false'
       mdbook build
+
+      if [ -n "${domain}" ]; then
+        echo "Generating sitemap.xml for domain: ${domain}"
+        mdbook-sitemap-generator \
+          --domain "${domain}" \
+          --output book/html/sitemap.xml 
+      fi
 
       runHook postBuild
     '';
@@ -29,29 +40,5 @@ in with pkgs; {
       runHook postInstall
     '';
   };
-  pre-commit-check = nix-pre-commit-hooks.run {
-    src = ./.;
-    # If your hooks are intrusive, avoid running on each commit with a default_states like this:
-    # default_stages = [ "manual" "pre-push" ];
-    hooks = {
-      # common
-      end-of-file-fixer.enable = true;
-      # nix
-      nixfmt-classic.enable = true;
-      # golang
-      gofmt.enable = true;
-      golangci-lint = {
-        enable = true;
-        package = pkgs.golangci-lint;
-        extraPackages = with pkgs; [ go openssl ];
-        stages = [ "pre-push" ]; # because it takes a while
-      };
-      gotest = {
-        enable = true;
-        package = pkgs.go;
-        extraPackages = with pkgs; [ openssl gcc ];
-        stages = [ "pre-push" ]; # because it takes a while
-      };
-    };
-  };
+  pre-commit-check = callPackage ./nix/pre-commit.nix { };
 }
