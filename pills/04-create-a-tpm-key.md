@@ -214,8 +214,7 @@ nameAlg of outPublic |
 | TPMT_TK_CREATION | creationTicket | ticket used by TPM2_CertifyCreation() to validate
 that the creation data was produced by the TPM |
 
-<p align="center"><b>Table: </b><em>TPM2_Create Response<sup class="footnote-reference"><a href="#7">7</a></sup></em></p>
-
+<p align="center"><b>Table: </b><em>TPM2_Create Response</em></p>
 
 The result contains two important fields: `outPrivate` and `outPublic`, which can safely be stored on disk because:
 
@@ -334,4 +333,3 @@ Then, we applied these ideas in a practical example.
 [^4]: also referred to as the *primary seed*
 [^5]: see the Wikipedia [article](https://en.wikipedia.org/wiki/Key_derivation_function)
 [^6]: it may have been generated elsewhere and then imported into the TPM
-[^7]: https://trustedcomputinggroup.org/wp-content/uploads/Trusted-Platform-Module-2.0-Library-Part-3-Version-184_pub.pdf#page=67

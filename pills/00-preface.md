@@ -46,6 +46,8 @@ If you want to explore the topic further or if the `TPM Pills` approach simply d
 | [TPM-JS by Google](https://github.com/tpm2dev/tpm.dev.tutorials) | TPM-JS lets you experiment with a software TPM device in your browser. It's an educational tool that teaches you how to use a TPM device to secure your workflows. <br><br>*Note: description from the repo*<br><br>***Warning: the repo is archived since 2022***  | Tutorials |
 | [TPMCourse by Nokia](https://github.com/nokia/TPMCourse) | A short course on getting started with understanding how a TPM 2.0 works. In this course we explain a number of the features of the TPM 2.0 through the TPM2_Tools through examples and, optionally, exercises.<br><br>*Note: description from the repo*  | Tutorials |
 
+<p align="center"><b>Table: </b><em>Educational Resources</em></p>
+
 ## Who Am I?
 
 I'm **Loïc Sikidi** a *passionate software engineer* from France. I love to learn and share my (little bit of) knowledge with others.
