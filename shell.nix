@@ -10,7 +10,15 @@ let
   pre-commit = import ./default.nix { };
   mdbook-sitemap-generator =
     pkgs.callPackage ./nix/pkgs/mdbook-sitemap-generator.nix { };
-in pkgs.mkShellNoCC {
+
+  # see https://github.com/NixOS/nixpkgs/issues/355486#issuecomment-2746187811
+  # to remember why we did this hack to fix the following error in github actions:
+  # '# runtime/cgo'
+  # 'Multiple conflicting values defined for DEVELOPER_DIR_arm64_apple_darwin
+  mkShellNoCC = pkgs.mkShellNoCC.override {
+    stdenv = pkgs.stdenvNoCC.override { extraBuildInputs = [ ]; };
+  };
+in mkShellNoCC {
   packages = with pkgs; [
     mdbook
     mdbook-linkcheck
