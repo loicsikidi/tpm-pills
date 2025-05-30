@@ -2,15 +2,15 @@
 
 buildGoModule rec {
   pname = "mdbook-sitemap-generator";
-  version = "1.0.0";
+  version = "1.1.0";
 
   src = fetchFromGitHub {
     owner = "loicsikidi";
     repo = "mdbook-sitemap-generator";
     tag = "v${version}";
-    hash = "sha256-V6/FYyE5+ESPk8ybUK4eGsX9CVPh3640CkoI/7lKc3Y=";
+    hash = "sha256-BA6qfkdVxAq1XENZ1s2uCi2CGJ9FMmFNbF1YZvansiw=";
   };
 
-  vendorHash = "sha256-CVycV7wxo7nOHm7qjZKfJrIkNcIApUNzN1mSIIwQN0g=";
+  vendorHash = "sha256-h5UXs7ujP0YIBKusstTDXvWBhqKpYs6HtzzdaB1+6Wg=";
 
 }
