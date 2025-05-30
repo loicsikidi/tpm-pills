@@ -1,20 +1,23 @@
 let
-  # mdbook pinned to 0.4.45
+  # mdbook pinned to 0.4.50
   # go to https://www.nixhub.io/packages/mdbook to the list of available versions
   nixpkgs = fetchTarball
-    "https://github.com/NixOS/nixpkgs/archive/dad564433178067be1fbdfcce23b546254b6d641.tar.gz";
+    "https://github.com/NixOS/nixpkgs/archive/bdac72d387dca7f836f6ef1fe547755fb0e9df61.tar.gz";
   pkgs = import nixpkgs {
     config = { };
     overlays = [ ];
   };
   pre-commit = import ./default.nix { };
+  mdbook-sitemap-generator =
+    pkgs.callPackage ./nix/pkgs/mdbook-sitemap-generator.nix { };
 in pkgs.mkShellNoCC {
   packages = with pkgs; [
     mdbook
     mdbook-linkcheck
+    mdbook-sitemap-generator
 
-    go # v1.23.5
-    delve # v1.24.0
+    go # v1.24.3
+    delve # v1.24.2
 
     # required to run TPM simulator
     # source: https://github.com/google/go-tpm-tools/tree/main/simulator
