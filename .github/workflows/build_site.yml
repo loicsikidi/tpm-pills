@@ -28,6 +28,6 @@ jobs:
       - name: Print nixpkgs version
         run: nix-instantiate --eval -E '(import <nixpkgs> {}).lib.version'
       - name: Build static sources
-        run: nix-build -A html-split --argstr domain ${{ vars.TARGET_BASEURL }}
+        run: nix-build -A html-split
       - name: Check for broken links
         run: nix-shell --run "mdbook build"
