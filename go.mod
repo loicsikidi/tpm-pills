@@ -6,7 +6,7 @@ toolchain go1.23.5
 
 require (
 	github.com/foxboron/swtpm_test v0.0.0-20230726224112-46aaafdf7006
-	github.com/google/go-tpm v0.9.5
+	github.com/google/go-tpm v0.9.6
 	github.com/stretchr/testify v1.11.1
 )
 
