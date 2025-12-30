@@ -30,5 +30,4 @@ in with pkgs; {
       runHook postInstall
     '';
   };
-  pre-commit-check = callPackage ./nix/pre-commit.nix { };
 }
