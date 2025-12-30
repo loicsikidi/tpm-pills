@@ -1,5 +1,7 @@
-{ fetchFromGitHub, buildGoModule }:
-
+{
+  fetchFromGitHub,
+  buildGoModule,
+}:
 buildGoModule rec {
   pname = "mdbook-sitemap-generator";
   version = "1.2.0";
@@ -12,5 +14,4 @@ buildGoModule rec {
   };
 
   vendorHash = "sha256-WUQW8EDJ7kT2CUZsNtlVUVwwqFRHkpkU6pFmx7/MDGg=";
-
 }
