@@ -36,7 +36,7 @@ jobs:
           persist-credentials: false
       # https://github.com/mvdan/github-actions-golang#how-do-i-set-up-caching-between-builds
       - name: Install Nix
-        uses: cachix/install-nix-action@456688f15bc354bef6d396e4a35f4f89d40bf2b7 # v31.8.2
+        uses: cachix/install-nix-action@4e002c8ec80594ecd40e759629461e26c8abed15 # v31.9.0
         with:
           nix_path: nixpkgs=channel:nixos-unstable
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
