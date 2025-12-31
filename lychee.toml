@@ -1,0 +1,9 @@
+extensions = ["md"]
+timeout = 5 # in seconds
+accept = [
+    "200",
+    "429",
+    "502", # it's ok if the backend is down during the scan
+    "503", # it's ok if the backend is down during the scan
+]
+exclude = []

@@ -16,7 +16,10 @@ let
     inherit pkgs;
     hooksConfig = {
       gotest.settings.flags = "-race";
-      lychee.enable = false;
+      lychee = {
+        settings.flags = "./pills"; # check only pills directory
+        stages = ["pre-commit"];
+      };
     };
   };
 
@@ -32,7 +35,6 @@ in
     packages = with pkgs;
       [
         mdbook
-        mdbook-linkcheck
         mdbook-sitemap-generator
 
         # required to run TPM simulator
