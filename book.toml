@@ -10,9 +10,6 @@ additional-css = ["custom.css"]
 git-repository-url = "https://github.com/loicsikidi/tpm-pills"
 mathjax-support = true
 
-[output.linkcheck]
-follow-web-links = true
-
 [output.sitemap-generator]
 domain = "tpmpills.com"
 

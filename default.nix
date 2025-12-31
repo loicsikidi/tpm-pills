@@ -7,13 +7,11 @@ in
       name = "tpm-pills";
       src = lib.cleanSource ./.;
 
-      nativeBuildInputs = [mdbook mdbook-linkcheck mdbook-sitemap-generator];
+      nativeBuildInputs = [mdbook mdbook-sitemap-generator];
 
       buildPhase = ''
         runHook preBuild
 
-        # We can't check external links inside the sandbox, but it's good to check them outside the sandbox.
-        substituteInPlace book.toml --replace-fail 'follow-web-links = true' 'follow-web-links = false'
         mdbook build
 
         runHook postBuild
