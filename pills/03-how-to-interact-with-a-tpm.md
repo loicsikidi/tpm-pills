@@ -111,6 +111,16 @@ Technically, this is a TPM that responds to SPI (Serial Peripheral Interface) in
 ![](./images/03-pill/ltt2go-diagram.png)
 *source: https://github.com/tpm2-software/tpm2-tss/blob/master/doc/tcti.md#tcti-spi-ltt2go*
 
+## Acknowledgement
+
+This pill is derived from Trusted Computing 1101: Introductory Trusted Platform Module (TPM) usage class, available at <a href="https://ost2.fyi/TC1101">https://ost2.fyi/TC1101</a>.
+
+<div class="info">
+<b>Info</b>
+
+To be precise, the term "passive device" was taken from this content (which I recommend), the rest is original.
+</div>
+
 ## Conclusion
 
 In this pill, we’ve seen how we can interact with a TPM and, most importantly, the wide range of methods available to us—whether for local or remote access.
