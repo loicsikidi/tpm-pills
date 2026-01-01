@@ -91,7 +91,7 @@ go run github.com/loicsikidi/tpm-pills/examples/05-pill decrypt --public ./tpmke
 
 # clean up
 go run github.com/loicsikidi/tpm-pills/examples/05-pill cleanup
-rm ./tpmkey.pub ./tpmkey.priv ./public.pem ./blob.enc
+rm -f ./tpmkey.pub ./tpmkey.priv ./public.pem ./blob.enc
 ```
 
 Under the hood, the command looks like this:
@@ -149,6 +149,10 @@ go run github.com/loicsikidi/tpm-pills/examples/05-pill verify --key ./public.pe
 # Alternatively, you can use the `openssl` command to verify the signature
 openssl dgst -sha256 -verify ./public.pem -signature ./message.sig <(echo -n 'Hello TPM Pills!')
 # output: Verified OK
+
+# clean up
+go run github.com/loicsikidi/tpm-pills/examples/05-pill cleanup
+rm -f ./tpmkey.pub ./tpmkey.priv ./public.pem ./message.sig
 ```
 
 <div class="info">
@@ -241,7 +245,7 @@ openssl dgst -sha256 -verify ./public.pem -signature ./message.sig <(echo -n 'He
 
 # Clean up
 go run github.com/loicsikidi/tpm-pills/examples/05-pill cleanup
-rm ./tpmkey.pub ./tpmkey.priv ./public.pem ./message.sig
+rm -f ./tpmkey.pub ./tpmkey.priv ./public.pem ./message.sig
 ```
 
 ## Conclusion
