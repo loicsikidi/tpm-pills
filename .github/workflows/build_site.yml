@@ -4,7 +4,15 @@ name: |
 on:
   push:
     branches: ["**"]
+    paths:
+      - 'pills/**'
+      - 'book.toml'
+      - 'custom.css'
   pull_request:
+    paths:
+      - 'pills/**'
+      - 'book.toml'
+      - 'custom.css'
   schedule:
     - cron: '0 12 * * 6' # every saturday at noon (UTC)
 
