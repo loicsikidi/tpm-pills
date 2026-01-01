@@ -91,7 +91,7 @@ Contrary to Microsoft and Linux, Apple made the decision to use a proprietary so
 <div class="info">
 <b>Tip</b>
 
-If you are a macOS user, you can still stay with us because most of the exemples will use a Software TPM which you will be able to run on your machine.
+If you are a macOS user, you can still stay with us because most of the examples will use a Software TPM which you will be able to run on your machine.
 </div>
 
 ## Next pill...
@@ -108,7 +108,7 @@ If you are a macOS user, you can still stay with us because most of the exemples
 
 [^1]: Hardware Security Module (see more in [Wikipedia](https://en.wikipedia.org/wiki/Hardware_security_module))
 [^2]: see more in [Wikipedia](https://en.wikipedia.org/wiki/Smart_card)
-[^3]: via a `Secure Boot` or a `Mesured Boot`.
+[^3]: via a `Secure Boot` or a `Measured Boot`.
 [^4]: it has its own memory (RAM) and its own storage, although the resources are very limited.
 [^5]: [Window 11 - System requirements](https://www.microsoft.com/en-us/windows/windows-11-specifications?r=1#table1)
 [^6]: This decision by a tech giant led to a drop in TPM prices.

@@ -89,7 +89,7 @@ tpm2 --version
 <div class="info">
 <b>Info</b>
 
- For those who are unfamiliar, <a href="https://github.com/jetify-com/devbox" target="_blank">Devbox</a> is a layer on top of <b>Nix</b> that allows you to obtain a deterministic shell without having to master Nix language.
+ For those who are unfamiliar, <a href="https://github.com/jetify-com/devbox" target="_blank">Devbox</a> is a layer on top of <b>Nix</b> that allows you to obtain a deterministic shell without having to master the Nix language.
 </div>
   
 If you are a Devbox user, `TPM Pills` also provides a configuration (i.e. `devbox.json`) at the root of the repository.  
@@ -116,9 +116,9 @@ tpm2 --version
 * **swtpm**: Use your preferred package manager or build the sources by following the [official documentation](https://github.com/stefanberger/swtpm/wiki)
 * **tpm2-tools**: Use your preferred *package manager* or build the sources by following the [official documentation](https://tpm2-tools.readthedocs.io/en/latest/INSTALL/)
 
-## Example: validate TPM's version  
+## Example: validate TPM's version
 
-Let’s finally get to the serious stuff! We will check the version of the TPM installed on your machine and ensure that it is a `TPM 2.0`. We will able to do this by interacting directly with the TPM using a command called `TPM2_GetCapability`.
+Let's finally get to the serious stuff! We will check the version of the TPM installed on your machine and ensure that it is a `TPM 2.0`. We will be able to do this by interacting directly with the TPM using a command called `TPM2_GetCapability`.
 
 <div class="info">
 <b>Info</b>
