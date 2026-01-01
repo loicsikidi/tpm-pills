@@ -1,9 +1,16 @@
 name: Go tests
 on:
   push:
-    branches: ["main"]
-  pull_request:
     branches: ["**"]
+    paths:
+      - '**/*.go'
+      - 'go.mod'
+      - 'go.sum'
+  pull_request:
+    paths:
+      - '**/*.go'
+      - 'go.mod'
+      - 'go.sum'
   schedule: # daily at 19:00 UTC
     - cron: '0 19 * * *'
   workflow_dispatch:
