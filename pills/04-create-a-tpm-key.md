@@ -43,9 +43,9 @@ Below is a full list of hierarchies:
 
 | Name | Purpose | Type |
 | ---- | ------- | ---- |
-| Storage or Owner hierarchy | Intended for non-privacy-sentive operations by the platform owner (e.g., an IT department, the end user).  | Persisted | 
+| Storage or Owner hierarchy | Intended for non-privacy-sensitive operations by the platform owner (e.g., an IT department, the end user).  | Persisted | 
 | Platform hierarchy | Intended to be under the control of the platform manufacturer[^3] for early boot tasks (e.g., BIOS, UEFI). In other words, it's not meant to be used by the end user. | Persisted |
-| Endorsement hierarchy | Intended for privacy-sentive operations when the user or an organization has privacy concerns.  | Persisted |
+| Endorsement hierarchy | Intended for privacy-sensitive operations when the user or an organization has privacy concerns.  | Persisted |
 | Null hierarchy | Intended to store ephemeral objects (e.g. sessions, context, etc.) used internally by the TPM. The end user can use this hierarchy to use ephemeral keys that will be erased at reboot. | Volatile |
 
 <p align="center"><b>Table: </b><em>Four TPM hierarchies</em></p>
@@ -53,7 +53,7 @@ Below is a full list of hierarchies:
 <div class="info">
 <b>What does "privacy" means in the TPM specification?</b>
 
-<code class="hljs">Privacy</code> refers to mecanisms which prevent a third party from correlating or identifying that multiple keys originate from the same TPM.
+<code class="hljs">Privacy</code> refers to mechanisms which prevent a third party from correlating or identifying that multiple keys originate from the same TPM.
 
 <em>Note: in a enterprise context, the opposite may be desirable for auditing and control purposes.</em>
 </div>
