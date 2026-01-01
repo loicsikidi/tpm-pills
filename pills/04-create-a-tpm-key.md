@@ -284,7 +284,7 @@ go run github.com/loicsikidi/tpm-pills/examples/04-pill cleanup
 # output: State cleaned successfully 🚀
 
 # remove created files
-rm ./tpmkey.pub ./tpmkey.priv
+rm -f ./tpmkey.pub ./tpmkey.priv
 ```
 
 > *Note: by default, the example uses [swtpm](https://github.com/stefanberger/swtpm) as a TPM simulator. If you want to use a real TPM, you can specify the `--use-real-tpm` flag.*

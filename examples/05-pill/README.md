@@ -46,7 +46,7 @@ go run github.com/loicsikidi/tpm-pills/examples/05-pill decrypt --public ./tpmke
 go run github.com/loicsikidi/tpm-pills/examples/05-pill cleanup
 
 # remove created files
-rm ./tpmkey.pub ./tpmkey.priv ./public.pem ./blob.enc
+rm -f ./tpmkey.pub ./tpmkey.priv ./public.pem ./blob.enc
 ```
 
 ### Sign/Verify a message with a non restricted signing key
@@ -75,7 +75,7 @@ openssl dgst -sha256 -verify ./public.pem -signature ./message.sig <(echo -n 'He
 go run github.com/loicsikidi/tpm-pills/examples/05-pill cleanup
 
 # remove created files
-rm ./tpmkey.pub ./tpmkey.priv ./public.pem ./message.sig
+rm -f ./tpmkey.pub ./tpmkey.priv ./public.pem ./message.sig
 ```
 
 ### Sign/Verify a message with a restricted signing key
@@ -104,7 +104,7 @@ openssl dgst -sha256 -verify ./public.pem -signature ./message.sig <(echo -n 'He
 go run github.com/loicsikidi/tpm-pills/examples/05-pill cleanup
 
 # remove created files
-rm ./tpmkey.pub ./tpmkey.priv ./public.pem ./message.sig
+rm -f ./tpmkey.pub ./tpmkey.priv ./public.pem ./message.sig
 ```
 
 ## Run tests
