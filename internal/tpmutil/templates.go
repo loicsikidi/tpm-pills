@@ -18,8 +18,7 @@ var SymTemplatesByKeyType = map[options.KeyType]tpm2.TPMTPublic{
 }
 
 var (
-	ECCP256SignerTemplate = tpm2.New2B(ECCSignerTemplate)
-	ECCSignerTemplate     = tpm2.TPMTPublic{
+	ECCSignerTemplate = tpm2.TPMTPublic{
 		Type:    tpm2.TPMAlgECC,
 		NameAlg: tpm2.TPMAlgSHA256,
 		ObjectAttributes: tpm2.TPMAObject{
@@ -45,8 +44,7 @@ var (
 			},
 		),
 	}
-	ECCP256RestrictedSignerTemplate = tpm2.New2B(ECCRestrictedSignerTemplate)
-	ECCRestrictedSignerTemplate     = tpm2.TPMTPublic{
+	ECCRestrictedSignerTemplate = tpm2.TPMTPublic{
 		Type:    tpm2.TPMAlgECC,
 		NameAlg: tpm2.TPMAlgSHA256,
 		ObjectAttributes: tpm2.TPMAObject{
@@ -103,8 +101,7 @@ var (
 			},
 		),
 	})
-	RSA2048EncryptTemplate = tpm2.New2B(RSAEncryptTemplate)
-	RSAEncryptTemplate     = tpm2.TPMTPublic{
+	RSAEncryptTemplate = tpm2.TPMTPublic{
 		Type:    tpm2.TPMAlgRSA,
 		NameAlg: tpm2.TPMAlgSHA256,
 		ObjectAttributes: tpm2.TPMAObject{

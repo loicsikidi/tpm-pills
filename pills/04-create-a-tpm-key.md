@@ -227,7 +227,6 @@ The result contains two important fields: `outPrivate` and `outPublic`, which ca
 Due to the TPM's limited resources, keys are typically stored externally.
 </div>
 
-
 ### Loading the Ordinary Key
 
 To load a key into the TPM, we need to use `TPM2_Load` command along with `TPM2B_PUBLIC` and `TPM2B_PRIVATE` data.
@@ -263,19 +262,12 @@ Depending on your setup, you can run the following terminal commands:
 
 ```bash
 # Create the key
-# Note: the key will be stored in the current directory with the name `tpmkey.pub` and `tpmkey.priv`
+# Note: the key will be stored in the current directory with the name `key.tpm`
 go run github.com/loicsikidi/tpm-pills/examples/04-pill create
 # output: Ordinary key created successfully 🚀
 
-# list created files
-ls -l tpmkey.*
-
-# OPTIONAL: use tpm2-tools to print public object
-tpm2 print -t TPM2B_PUBLIC ./tpmkey.pub
-
 # Load the key in the TPM
-go run github.com/loicsikidi/tpm-pills/examples/04-pill load --public ./tpmkey.pub \
---private ./tpmkey.priv
+go run github.com/loicsikidi/tpm-pills/examples/04-pill load --key ./key.tpm
 # output: Ordinary key loaded successfully 🚀
 
 # Clean up
@@ -283,11 +275,19 @@ go run github.com/loicsikidi/tpm-pills/examples/04-pill load --public ./tpmkey.p
 go run github.com/loicsikidi/tpm-pills/examples/04-pill cleanup
 # output: State cleaned successfully 🚀
 
-# remove created files
-rm -f ./tpmkey.pub ./tpmkey.priv
+# remove created file
+rm -f ./key.tpm
 ```
 
 > *Note: by default, the example uses [swtpm](https://github.com/stefanberger/swtpm) as a TPM simulator. If you want to use a real TPM, you can specify the `--use-real-tpm` flag.*
+
+The `key.tpm` file is a JSON document that stores the key material returned by `TPM2_Create`. It contains the following fields:
+
+* `outPrivate`: the encrypted private portion of the key (base64-encoded `TPM2B_PRIVATE`)
+* `outPublic`: the public portion of the key (base64-encoded `TPM2B_PUBLIC`)
+* other fields related to the creation process (base64-encoded)
+
+This JSON format makes it convenient to persist and reload keys, while the encryption of `TPM2B_PRIVATE` ensures that the sensitive key material remains protected.
 
 <div class="info">
 <b>Why isn’t the primary key exported?</b>

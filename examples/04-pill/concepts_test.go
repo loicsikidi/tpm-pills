@@ -20,10 +20,10 @@ func TestReproductability(t *testing.T) {
 	}
 	defer tpm.Close()
 
-	firstPrimary, closer := setupCreatePrimary(t, tpm, tpmutil.ECCP256SignerTemplate)
+	firstPrimary, closer := setupCreatePrimary(t, tpm, tpm2.New2B(tpmutil.ECCSignerTemplate))
 	defer closer()
 
-	secondPrimary, secondCloser := setupCreatePrimary(t, tpm, tpmutil.ECCP256SignerTemplate)
+	secondPrimary, secondCloser := setupCreatePrimary(t, tpm, tpm2.New2B(tpmutil.ECCSignerTemplate))
 	defer secondCloser()
 
 	firstEccPub := mustPublicKey(t, firstPrimary)
@@ -43,7 +43,7 @@ func TestCreate(t *testing.T) {
 	defer tpm.Close()
 
 	// not allowed to create keys
-	signerPrimary, closer := setupCreatePrimary(t, tpm, tpmutil.ECCP256SignerTemplate)
+	signerPrimary, closer := setupCreatePrimary(t, tpm, tpm2.New2B(tpmutil.ECCSignerTemplate))
 	defer closer()
 
 	createCmd := tpm2.Create{
@@ -51,7 +51,7 @@ func TestCreate(t *testing.T) {
 			Name:   signerPrimary.Name,
 			Handle: signerPrimary.ObjectHandle,
 		},
-		InPublic: tpmutil.ECCP256SignerTemplate,
+		InPublic: tpm2.New2B(tpmutil.ECCSignerTemplate),
 	}
 
 	_, err = createCmd.Execute(tpm)
