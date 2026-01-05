@@ -80,7 +80,7 @@ func TestHashHierarchyWithRestrictedKey(t *testing.T) {
 					Handle: srkCreate.ObjectHandle,
 					Name:   srkCreate.Name,
 				},
-				InPublic: tpmutil.ECCP256RestrictedSignerTemplate,
+				InPublic: tpm2.New2B(tpmutil.ECCRestrictedSignerTemplate),
 			}.Execute(tpm)
 			if err != nil {
 				t.Fatalf("could not create key: %v", err)

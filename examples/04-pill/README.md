@@ -18,17 +18,26 @@ This example requires `swtpm` installed on your running system. Read [pill #2](h
 
 ## Run the example
 
+> [!TIP]
+> Examples use a Software TPM (i.e swtpm).
+> If you want to rely on a real TPM, add the `--use-real-tpm` flag to the command.
+
 ```bash
 # Create the key
-# Note: the key will be stored in the current directory with the name `tpmkey.pub` and `tpmkey.priv`
+# Note: the key will be stored in the current directory with the name `key.tpm` and `public.pem`
 go run github.com/loicsikidi/tpm-pills/examples/04-pill create
 
 # Load the key
-go run github.com/loicsikidi/tpm-pills/examples/04-pill load --public ./tpmkey.pub --private ./tpmkey.priv
+go run github.com/loicsikidi/tpm-pills/examples/04-pill load --key ./key.tpm
 
 # Clean up
-# Note: the command wll remove swtpm state
+# Note:
+# 1. the command will remove swtpm state
+# 2. the command is optional if --use-real-tpm flag is set
 go run github.com/loicsikidi/tpm-pills/examples/04-pill cleanup
+
+# remove created files
+rm -f ./key.tpm
 ```
 
 ## Run tests

@@ -56,7 +56,7 @@ func TestRSAOAEPDecryption(t *testing.T) {
 			Handle: createPrimaryRsp.ObjectHandle,
 			Name:   createPrimaryRsp.Name,
 		},
-		InPublic: tpmutil.RSA2048EncryptTemplate,
+		InPublic: tpm2.New2B(tpmutil.RSAEncryptTemplate),
 	}
 	createRsp, err := createCmd.Execute(tpm)
 	if err != nil {
@@ -151,7 +151,7 @@ func TestRSAOAEPDecryptionFailure(t *testing.T) {
 			Handle: createPrimaryRsp.ObjectHandle,
 			Name:   createPrimaryRsp.Name,
 		},
-		InPublic: tpmutil.RSA2048EncryptTemplate,
+		InPublic: tpm2.New2B(tpmutil.RSAEncryptTemplate),
 	}
 	createRsp, err := createCmd.Execute(tpm)
 	if err != nil {
