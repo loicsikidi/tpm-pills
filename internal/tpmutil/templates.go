@@ -18,7 +18,8 @@ var SymTemplatesByKeyType = map[options.KeyType]tpm2.TPMTPublic{
 }
 
 var (
-	ECCP256SignerTemplate = tpm2.New2B(tpm2.TPMTPublic{
+	ECCP256SignerTemplate = tpm2.New2B(ECCSignerTemplate)
+	ECCSignerTemplate     = tpm2.TPMTPublic{
 		Type:    tpm2.TPMAlgECC,
 		NameAlg: tpm2.TPMAlgSHA256,
 		ObjectAttributes: tpm2.TPMAObject{
@@ -43,8 +44,9 @@ var (
 				CurveID: tpm2.TPMECCNistP256,
 			},
 		),
-	})
-	ECCP256RestrictedSignerTemplate = tpm2.New2B(tpm2.TPMTPublic{
+	}
+	ECCP256RestrictedSignerTemplate = tpm2.New2B(ECCRestrictedSignerTemplate)
+	ECCRestrictedSignerTemplate     = tpm2.TPMTPublic{
 		Type:    tpm2.TPMAlgECC,
 		NameAlg: tpm2.TPMAlgSHA256,
 		ObjectAttributes: tpm2.TPMAObject{
@@ -70,7 +72,7 @@ var (
 				CurveID: tpm2.TPMECCNistP256,
 			},
 		),
-	})
+	}
 	ECCP256StorageParentTemplate = tpm2.New2B(tpm2.TPMTPublic{
 		Type:    tpm2.TPMAlgECC,
 		NameAlg: tpm2.TPMAlgSHA256,
@@ -101,7 +103,8 @@ var (
 			},
 		),
 	})
-	RSA2048EncryptTemplate = tpm2.New2B(tpm2.TPMTPublic{
+	RSA2048EncryptTemplate = tpm2.New2B(RSAEncryptTemplate)
+	RSAEncryptTemplate     = tpm2.TPMTPublic{
 		Type:    tpm2.TPMAlgRSA,
 		NameAlg: tpm2.TPMAlgSHA256,
 		ObjectAttributes: tpm2.TPMAObject{
@@ -129,7 +132,7 @@ var (
 				Buffer: make([]byte, 256),
 			},
 		),
-	})
+	}
 	ECCSRKTemplate    = tpmutil.ECCSRKTemplate
 	AES128CFBTemplate = tpm2.TPMTPublic{
 		Type:    tpm2.TPMAlgSymCipher,

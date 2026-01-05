@@ -11,9 +11,9 @@ A TPM is capable of performing basic cryptographic operations such as encryption
 <div class="info">
 <strong>Info</strong>
 
-The code of the CLI  that you will see below is fully available <a href="https://github.com/loicsikidi/tpm-pills/tree/main/examples/05-pill" target="_blank">here</a>.
+The code of the CLI that you will see below is fully available <a href="https://github.com/loicsikidi/tpm-pills/tree/main/examples/05-pill" target="_blank">here</a>.
 
-> Note: if you want to use a real TPM in the examples, you can add `--use-real-tpm` flag in `go run github.com/loicsikidi/tpm-pills/examples/05-pill create` command.
+Note: if you want to use a real TPM in the examples, you can add <code class="hljs">--use-real-tpm</code> flag in each command (*except* `cleanup`).
 </div>
 
 ## Encryption / Decryption
@@ -46,8 +46,8 @@ Now that this is clarified, let’s look at a practical example! First, we’ll 
 To do so, run the command below:
 
 ```bash
-# Note: the key will be stored in the current directory 
-# with the names `tpmkey.pub`, `tpmkey.priv` and `public.pem`
+# Note: the key will be stored in the current directory
+# with the names `key.tpm` and `public.pem`
 go run github.com/loicsikidi/tpm-pills/examples/05-pill create --type decrypt
 # output: Ordinary key created successfully 🚀
 ```
@@ -85,13 +85,13 @@ All prerequisites are now met to decrypt:
 
 ```bash
 # Decrypt the blob using the private key held in the TPM
-go run github.com/loicsikidi/tpm-pills/examples/05-pill decrypt --public ./tpmkey.pub \
---private ./tpmkey.priv --in ./blob.enc
+go run github.com/loicsikidi/tpm-pills/examples/05-pill decrypt --key ./key.tpm \
+--in ./blob.enc
 # output: Decrypted "Hello TPM Pills!" successfully 🚀
 
 # clean up
 go run github.com/loicsikidi/tpm-pills/examples/05-pill cleanup
-rm -f ./tpmkey.pub ./tpmkey.priv ./public.pem ./blob.enc
+rm -f ./key.tpm ./public.pem ./blob.enc
 ```
 
 Under the hood, the command looks like this:
@@ -138,8 +138,8 @@ This key has the following attributes:
 Run the following commands to create and verify a message signature:
 
 ```bash
-go run github.com/loicsikidi/tpm-pills/examples/05-pill sign --public ./tpmkey.pub \
---private ./tpmkey.priv --message 'Hello TPM Pills!' --output ./message.sig
+go run github.com/loicsikidi/tpm-pills/examples/05-pill sign --key ./key.tpm \
+--message 'Hello TPM Pills!' --output ./message.sig
 # output: Signature saved to ./message.sig 🚀
 
 go run github.com/loicsikidi/tpm-pills/examples/05-pill verify --key ./public.pem \
@@ -152,7 +152,7 @@ openssl dgst -sha256 -verify ./public.pem -signature ./message.sig <(echo -n 'He
 
 # clean up
 go run github.com/loicsikidi/tpm-pills/examples/05-pill cleanup
-rm -f ./tpmkey.pub ./tpmkey.priv ./public.pem ./message.sig
+rm -f ./key.tpm ./public.pem ./message.sig
 ```
 
 <div class="info">
@@ -229,14 +229,16 @@ As a demonstration, here’s the same example as earlier, but this time using a 
 
 
 ```bash
-go run github.com/loicsikidi/tpm-pills/examples/05-pill create --type restrictedSigner
+go run github.com/loicsikidi/tpm-pills/examples/05-pill create --type restricted-signer
 
 # Sign a message using the private key held in the TPM
-go run github.com/loicsikidi/tpm-pills/examples/05-pill sign --public ./tpmkey.pub --private ./tpmkey.priv --message 'Hello TPM Pills!' --output ./message.sig
+go run github.com/loicsikidi/tpm-pills/examples/05-pill sign --key ./key.tpm \
+--message 'Hello TPM Pills!' --output ./message.sig
 # output: Signature saved to ./message.sig 🚀
 
 # Verify the signature using the public key
-go run github.com/loicsikidi/tpm-pills/examples/05-pill verify --key ./public.pem --signature ./message.sig --message 'Hello TPM Pills!'
+go run github.com/loicsikidi/tpm-pills/examples/05-pill verify --key ./public.pem \
+--signature ./message.sig --message 'Hello TPM Pills!'
 # output: Signature verified successfully 🚀
 
 # Alternatively, you can use the `openssl` command to verify the signature
@@ -245,7 +247,7 @@ openssl dgst -sha256 -verify ./public.pem -signature ./message.sig <(echo -n 'He
 
 # Clean up
 go run github.com/loicsikidi/tpm-pills/examples/05-pill cleanup
-rm -f ./tpmkey.pub ./tpmkey.priv ./public.pem ./message.sig
+rm -f ./key.tpm ./public.pem ./message.sig
 ```
 
 ## Conclusion

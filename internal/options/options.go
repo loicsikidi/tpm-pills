@@ -173,6 +173,31 @@ func (o *DecryptOpts) CheckAndSetDefaults() error {
 	return nil
 }
 
+type AsymDecryptOpts struct {
+	InputFilePath string
+	KeyBlobPath   string
+}
+
+func (o *AsymDecryptOpts) CheckAndSetDefaults() error {
+	dir, err := utils.FallbackDir()
+	if err != nil {
+		return err
+	}
+	if o.InputFilePath == "" {
+		o.InputFilePath = filepath.Join(dir, defaultEncryptedFileName)
+	}
+	if !utils.FileExists(o.InputFilePath) {
+		return fmt.Errorf("invalid input: InputFilePath does not exist")
+	}
+	if o.KeyBlobPath == "" {
+		o.KeyBlobPath = filepath.Join(dir, defaultKeyFileName)
+	}
+	if !utils.FileExists(o.KeyBlobPath) {
+		return fmt.Errorf("invalid input: KeyBlobPath does not exist")
+	}
+	return nil
+}
+
 type SignOpts struct {
 	KeyBlobPath    string
 	Message        string
@@ -180,8 +205,12 @@ type SignOpts struct {
 }
 
 func (o *SignOpts) CheckAndSetDefaults() error {
+	dir, err := utils.FallbackDir()
+	if err != nil {
+		return err
+	}
 	if o.KeyBlobPath == "" {
-		return fmt.Errorf("invalid input: KeyBlobPath is required")
+		o.KeyBlobPath = filepath.Join(dir, defaultKeyFileName)
 	}
 	if !utils.FileExists(o.KeyBlobPath) {
 		return fmt.Errorf("invalid input: KeyBlobPath does not exist")
@@ -190,14 +219,10 @@ func (o *SignOpts) CheckAndSetDefaults() error {
 		return fmt.Errorf("invalid input: Message is required")
 	}
 	if o.OutputFilePath == "" {
-		dir, err := utils.FallbackDir()
-		if err != nil {
-			return err
-		}
 		o.OutputFilePath = filepath.Join(dir, defaultSignedFileName)
 	}
-	if !utils.FileExists(o.OutputFilePath) {
-		return fmt.Errorf("invalid input: OutputFilePath does not exist")
+	if !utils.DirExists(filepath.Dir(o.OutputFilePath)) {
+		return fmt.Errorf("invalid input: OutputFilePath parent directory does not exist")
 	}
 	return nil
 }
