@@ -27,7 +27,7 @@ This example requires `swtpm` installed on your running system. Read [pill #2](h
 
 ```bash
 # Create the decryption key
-# Note: the key will be stored in the current directory with the name `tpmkey.pub`, `tpmkey.priv` and `public.pem`
+# Note: the key will be stored in the current directory with the name `key.tpm` and `public.pem`
 go run github.com/loicsikidi/tpm-pills/examples/05-pill create --type decrypt
 
 # Encrypt a blob using the public key
@@ -37,27 +37,27 @@ go run github.com/loicsikidi/tpm-pills/examples/05-pill encrypt --key ./public.p
 openssl pkeyutl -encrypt -in <(echo -n 'Hello TPM Pills!') -out ./blob.enc -pubin -inkey public.pem -pkeyopt rsa_padding_mode:oaep -pkeyopt rsa_oaep_md:sha256
 
 # Decrypt the blob using the private key held in the TPM
-go run github.com/loicsikidi/tpm-pills/examples/05-pill decrypt --public ./tpmkey.pub --private ./tpmkey.priv --in ./blob.enc
+go run github.com/loicsikidi/tpm-pills/examples/05-pill decrypt --key ./key.tpm --in ./blob.enc
 
 # Clean up
-# Note: 
+# Note:
 # 1. the command will remove swtpm state
 # 2. the command is optional if --use-real-tpm flag is set
 go run github.com/loicsikidi/tpm-pills/examples/05-pill cleanup
 
 # remove created files
-rm -f ./tpmkey.pub ./tpmkey.priv ./public.pem ./blob.enc
+rm -f ./key.tpm ./public.pem ./blob.enc
 ```
 
 ### Sign/Verify a message with a non restricted signing key
 
 ```bash
 # Create the non-restricted signing key
-# Note: the key will be stored in the current directory with the name `tpmkey.pub`, `tpmkey.priv` and `public.pem`
+# Note: the key will be stored in the current directory with the name `key.tpm` and `public.pem`
 go run github.com/loicsikidi/tpm-pills/examples/05-pill create --type signer
 
 # Sign a message using the private key held in the TPM
-go run github.com/loicsikidi/tpm-pills/examples/05-pill sign --public ./tpmkey.pub --private ./tpmkey.priv --message 'Hello TPM Pills!' --output ./message.sig
+go run github.com/loicsikidi/tpm-pills/examples/05-pill sign --key ./key.tpm --message 'Hello TPM Pills!' --output ./message.sig
 # output: Signature saved to ./message.sig 🚀
 
 # Verify the signature using the public key
@@ -75,18 +75,18 @@ openssl dgst -sha256 -verify ./public.pem -signature ./message.sig <(echo -n 'He
 go run github.com/loicsikidi/tpm-pills/examples/05-pill cleanup
 
 # remove created files
-rm -f ./tpmkey.pub ./tpmkey.priv ./public.pem ./message.sig
+rm -f ./key.tpm ./public.pem ./message.sig
 ```
 
 ### Sign/Verify a message with a restricted signing key
 
 ```bash
 # Create the restricted signing key
-# Note: the key will be stored in the current directory with the name `tpmkey.pub`, `tpmkey.priv` and `public.pem`
+# Note: the key will be stored in the current directory with the name `key.tpm` and `public.pem`
 go run github.com/loicsikidi/tpm-pills/examples/05-pill create --type restrictedSigner
 
 # Sign a message using the private key held in the TPM
-go run github.com/loicsikidi/tpm-pills/examples/05-pill sign --public ./tpmkey.pub --private ./tpmkey.priv --message 'Hello TPM Pills!' --output ./message.sig
+go run github.com/loicsikidi/tpm-pills/examples/05-pill sign --key ./key.tpm --message 'Hello TPM Pills!' --output ./message.sig
 # output: Signature saved to ./message.sig 🚀
 
 # Verify the signature using the public key
@@ -104,7 +104,7 @@ openssl dgst -sha256 -verify ./public.pem -signature ./message.sig <(echo -n 'He
 go run github.com/loicsikidi/tpm-pills/examples/05-pill cleanup
 
 # remove created files
-rm -f ./tpmkey.pub ./tpmkey.priv ./public.pem ./message.sig
+rm -f ./key.tpm ./public.pem ./message.sig
 ```
 
 ## Run tests
