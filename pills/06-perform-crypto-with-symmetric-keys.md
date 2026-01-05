@@ -17,7 +17,7 @@ Now, let's take a closer look at how things work through a series of small examp
 
 The code of the CLI that you will see below is fully available <a href="https://github.com/loicsikidi/tpm-pills/tree/main/examples/06-pill" target="_blank">here</a>.
 
-Note: if you want to use a real TPM in the examples, you can add <code class="hljs">--use-real-tpm</code> flag in each command.
+Note: if you want to use a real TPM in the examples, you can add <code class="hljs">--use-real-tpm</code> flag in each command (*except* `cleanup`).
 </div>
 
 ## Encryption / Decryption vs. Seal / Unseal
@@ -254,7 +254,7 @@ go run github.com/loicsikidi/tpm-pills/examples/06-pill hmac --data "secret"
 go run github.com/loicsikidi/tpm-pills/examples/06-pill hmac --data "secret"
 # output: HMAC result: "bde701bc281f6d5e55ee29b30c08c59fb05425298442b5060238af88305964a0" 🚀
 
-# cleanup
+# clean up
 go run github.com/loicsikidi/tpm-pills/examples/06-pill cleanup
 ```
 

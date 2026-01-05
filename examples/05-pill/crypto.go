@@ -14,29 +14,27 @@ import (
 	"github.com/google/go-tpm/tpm2"
 	"github.com/google/go-tpm/tpm2/transport"
 	"github.com/loicsikidi/tpm-pills/internal/tpmutil"
+	"github.com/loicsikidi/tpm-pills/internal/utils"
 )
 
 type ecdsaSignature struct {
 	R, S *big.Int
 }
 
-func decryptBlob(tpm transport.TPM, primaryTemplate tpm2.TPM2BPublic, inPath, pubPath, privPath string) ([]byte, error) {
-	loadedOrdinaryKey, closer, err := tpmutil.LoadOrdinaryKey(tpm, primaryTemplate, pubPath, privPath)
+func decryptBlob(tpm transport.TPM, primaryTemplate tpm2.TPMTPublic, inPath, keyBlobPath string) ([]byte, error) {
+	keyHandle, err := tpmutil.LoadKey(tpm, tpmutil.LoadKeyConfig{
+		ParentTemplate: primaryTemplate,
+		KeyBlobPath:    keyBlobPath,
+	})
 	if err != nil {
-		return nil, fmt.Errorf("failed to load ordinary key: %w", err)
+		return nil, fmt.Errorf("failed to load key: %w", err)
 	}
-	defer closer()
+	defer keyHandle.Close()
 
-	ciphertext, err := os.ReadFile(inPath)
-	if err != nil {
-		return nil, fmt.Errorf("failed to read input file: %w", err)
-	}
+	ciphertext, _ := utils.ReadFile(inPath)
 
 	decryptCmd := tpm2.RSADecrypt{
-		KeyHandle: tpm2.NamedHandle{
-			Handle: loadedOrdinaryKey.ObjectHandle,
-			Name:   loadedOrdinaryKey.Name,
-		},
+		KeyHandle:  keyHandle,
 		CipherText: tpm2.TPM2BPublicKeyRSA{Buffer: ciphertext},
 		InScheme: tpm2.TPMTRSADecrypt{
 			Scheme: tpm2.TPMAlgOAEP,
@@ -76,30 +74,25 @@ func encryptBlob(pub *rsa.PublicKey, message []byte) ([]byte, error) {
 	return ciphertext, nil
 }
 
-func signBlob(tpm transport.TPM, primaryTemplate tpm2.TPM2BPublic, message, pubPath, privPath string) ([]byte, error) {
-	loadedOrdinaryKey, closer, err := tpmutil.LoadOrdinaryKey(tpm, primaryTemplate, pubPath, privPath)
+func signBlob(tpm transport.TPM, primaryTemplate tpm2.TPMTPublic, message, keyBlobPath string) ([]byte, error) {
+	keyHandle, err := tpmutil.LoadKey(tpm, tpmutil.LoadKeyConfig{
+		ParentTemplate: primaryTemplate,
+		KeyBlobPath:    keyBlobPath,
+	})
 	if err != nil {
-		return nil, fmt.Errorf("failed to load ordinary key: %w", err)
+		return nil, fmt.Errorf("failed to load key: %w", err)
 	}
-	defer closer()
+	defer keyHandle.Close()
 
-	rspRP, err := tpm2.ReadPublic{
-		ObjectHandle: loadedOrdinaryKey.ObjectHandle,
-	}.Execute(tpm)
-	if err != nil {
-		return nil, fmt.Errorf("failed to read public key: %w", err)
-	}
-
-	tpmPub, err := rspRP.OutPublic.Contents()
-	if err != nil {
-		return nil, fmt.Errorf("failed to get public key contents: %w", err)
+	if !keyHandle.HasPublic() {
+		return nil, fmt.Errorf("key handle does not have a public key")
 	}
 
 	var (
 		digest     tpm2.TPM2BDigest
 		validation tpm2.TPMTTKHashCheck
 	)
-	if tpmPub.ObjectAttributes.Restricted {
+	if keyHandle.Public().ObjectAttributes.Restricted {
 		rspHash, err := tpm2.Hash{
 			Data:      tpm2.TPM2BMaxBuffer{Buffer: []byte(message)},
 			HashAlg:   tpm2.TPMAlgSHA256,
@@ -123,10 +116,7 @@ func signBlob(tpm transport.TPM, primaryTemplate tpm2.TPM2BPublic, message, pubP
 	}
 
 	signRsp, err := tpm2.Sign{
-		KeyHandle: tpm2.NamedHandle{
-			Handle: loadedOrdinaryKey.ObjectHandle,
-			Name:   loadedOrdinaryKey.Name,
-		},
+		KeyHandle:  keyHandle,
 		Digest:     digest,
 		Validation: validation,
 	}.Execute(tpm)
