@@ -5,4 +5,11 @@ book/*
 .direnv/
 *.drawio.bkp
 .pre-commit-config.yaml
+.$tpm-pills*
 .swtpm/
+.claude/
+CLAUDE.md
+.vscode/
+blob.enc
+key.tpm
+public.pem

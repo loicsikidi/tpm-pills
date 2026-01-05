@@ -55,7 +55,7 @@ func main() {
 	verifyKey := verifyCmd.String("key", "", "Path to the public key file")
 
 	if len(os.Args) < 2 {
-		fmt.Println("Expected 'create' or 'decrypt' subcommands")
+		flag.Usage()
 		os.Exit(1)
 	}
 
