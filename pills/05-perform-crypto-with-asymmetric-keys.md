@@ -98,20 +98,20 @@ Under the hood, the command looks like this:
 
 ```go
 decryptRsp, _ := tpm2.RSADecrypt{
-	KeyHandle: tpm2.NamedHandle{ // reference to the key doing the job
-		Handle: loadedOrdinaryKey.ObjectHandle,
-		Name:   loadedOrdinaryKey.Name,
-	},
-	CipherText: tpm2.TPM2BPublicKeyRSA{Buffer: ciphertext}, // encrypted blob
-	InScheme: tpm2.TPMTRSADecrypt{
-		Scheme: tpm2.TPMAlgOAEP, // algorithm
-		Details: tpm2.NewTPMUAsymScheme(
-			tpm2.TPMAlgOAEP,
-			&tpm2.TPMSEncSchemeOAEP{
-				HashAlg: tpm2.TPMAlgSHA256, // hash algorithm
-			},
-		),
-	},
+    KeyHandle: tpm2.NamedHandle{ // reference to the key doing the job
+        Handle: loadedOrdinaryKey.ObjectHandle,
+        Name:   loadedOrdinaryKey.Name,
+    },
+    CipherText: tpm2.TPM2BPublicKeyRSA{Buffer: ciphertext}, // encrypted blob
+    InScheme: tpm2.TPMTRSADecrypt{
+        Scheme: tpm2.TPMAlgOAEP, // algorithm
+        Details: tpm2.NewTPMUAsymScheme(
+            tpm2.TPMAlgOAEP,
+            &tpm2.TPMSEncSchemeOAEP{
+                HashAlg: tpm2.TPMAlgSHA256, // hash algorithm
+            },
+        ),
+    },
 }.Execute(tpm)
 fmt.Println(decryptRsp.Message.Buffer) // original message in plain text
 ```
@@ -165,11 +165,11 @@ In code, the `TPM_Sign` command looks like this:
 
 ```go
 signRsp, _ := tpm2.Sign{
-	KeyHandle: tpm2.NamedHandle{ // reference to the key doing the job
-		Handle: loadedOrdinaryKey.ObjectHandle,
-		Name:   loadedOrdinaryKey.Name,
-	},
-	Digest:     digest, // payload's digest 
+    KeyHandle: tpm2.NamedHandle{ // reference to the key doing the job
+        Handle: loadedOrdinaryKey.ObjectHandle,
+        Name:   loadedOrdinaryKey.Name,
+    },
+    Digest:     digest, // payload's digest 
 }.Execute(tpm)
 ```
 
@@ -206,18 +206,18 @@ Here's the equivalent in code:
 ```go
 // without error handling for more clarity
 rspHash, _ := tpm2.Hash{ // hash performed by the TPM
-	Data:      tpm2.TPM2BMaxBuffer{Buffer: []byte(message)},
-	HashAlg:   tpm2.TPMAlgSHA256,
-	Hierarchy: tpm2.TPMRHOwner,
+    Data:      tpm2.TPM2BMaxBuffer{Buffer: []byte(message)},
+    HashAlg:   tpm2.TPMAlgSHA256,
+    Hierarchy: tpm2.TPMRHOwner,
 }.Execute(tpm)
 
 signRsp, _ := tpm2.Sign{
-	KeyHandle: tpm2.NamedHandle{ // reference to the key doing the job
-		Handle: loadedOrdinaryKey.ObjectHandle,
-		Name:   loadedOrdinaryKey.Name,
-	},
-	Digest:     rspHash.OutHash, // digest
-	Validation: rspHash.Validation, // ticket
+    KeyHandle: tpm2.NamedHandle{ // reference to the key doing the job
+        Handle: loadedOrdinaryKey.ObjectHandle,
+        Name:   loadedOrdinaryKey.Name,
+    },
+    Digest:     rspHash.OutHash, // digest
+    Validation: rspHash.Validation, // ticket
 }.Execute(tpm)
 ```
 
