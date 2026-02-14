@@ -209,10 +209,8 @@ createRsp, _ := tpm2.Create{
 | **TPM2B_PRIVATE** | **outPrivate** |  **the private portion of the object** |
 | **TPM2B_PUBLIC** | **outPublic** | **the public portion of the created object** |
 |TPM2B_CREATION_DATA | creationData | contains a TPMS_CREATION_DATA |
-| TPM2B_DIGEST | creationHash | digest of creationData.creationData using
-nameAlg of outPublic |
-| TPMT_TK_CREATION | creationTicket | ticket used by TPM2_CertifyCreation() to validate
-that the creation data was produced by the TPM |
+| TPM2B_DIGEST | creationHash | digest of creationData.creationData using nameAlg of outPublic |
+| TPMT_TK_CREATION | creationTicket | ticket used by TPM2_CertifyCreation() to validate that the creation data was produced by the TPM |
 
 <p align="center"><b>Table: </b><em>TPM2_Create Response</em></p>
 
