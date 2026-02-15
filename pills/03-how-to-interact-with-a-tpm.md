@@ -113,7 +113,7 @@ Technically, this is a TPM that responds to SPI (Serial Peripheral Interface) in
 
 ## Acknowledgement
 
-This pill is derived from Trusted Computing 1101: Introductory Trusted Platform Module (TPM) usage class, available at <a href="https://ost2.fyi/TC1101">https://ost2.fyi/TC1101</a>.
+This pill is derived from Trusted Computing 1101: Introductory Trusted Platform Module (TPM) usage class, available at <a href="https://ost2.fyi/TC1101" target="_blank">https://ost2.fyi/TC1101</a>.
 
 <div class="info">
 <b>Info</b>
