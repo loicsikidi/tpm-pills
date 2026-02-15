@@ -7,7 +7,7 @@ The goal of this example is to show how to:
 1. create an ordinary key (ECC NIST P256) and to store its content in the filesystem
 1. load the key into the TPM
 
-[`create_key_test`](./create_key_test.go) on its part demonstrates two concepts described in the pill:
+[`concepts_test.go`](./concepts_test.go) on its part demonstrates two concepts described in the pill:
 
 1. a *Primary key* is reproducible
 1. only *Storage keys* can be used to create an *Ordinary key*

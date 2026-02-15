@@ -6,7 +6,7 @@ It’s important to keep in mind that a TPM is primarily a **passive** device. B
 
 ![](./images/03-pill/basic-tpm-interaction.png)
 
-In the <a href="02-install-tooling.html#example-validate-tpms-version" target="_blank">previous pill</a>, we used the `TPM2_GetCapability` command to display the TPM version. This command is very useful because it provides a set of information about a TPM (static data) and its current state (dynamic data). The two libraries (*tpm2-tools and go-tpm*) that we used did more or less the same thing:
+In the <a href="https://tpmpills.com/02-install-tooling.html#example-validate-tpms-version" target="_blank">previous pill</a>, we used the `TPM2_GetCapability` command to display the TPM version. This command is very useful because it provides a set of information about a TPM (static data) and its current state (dynamic data). The two libraries (*tpm2-tools and go-tpm*) that we used did more or less the same thing:
 
 1. The library created the `TPM2_GetCapability` command in accordance with the specification  
 1. The command was sent to the TPM[^2]

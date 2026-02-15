@@ -175,7 +175,7 @@ signRsp, _ := tpm2.Sign{
 
 ### Deep dive: signing with a *restricted* key
 
-In the <a href="04-create-a-tpm-key.html#key-attributes" target="_blank">previous pill</a>, we introduced the concept of a *restricted* key. To recap, this property allows a key to sign or encrypt/decrypt TPM-internal objects. Now the question arises: *is it possible to sign external data with a restricted key?* The answer is **yes**, but under certain conditions.
+In the <a href="https://tpmpills.com/04-create-a-tpm-key.html#key-attributes" target="_blank">previous pill</a>, we introduced the concept of a *restricted* key. To recap, this property allows a key to sign or encrypt/decrypt TPM-internal objects. Now the question arises: *is it possible to sign external data with a restricted key?* The answer is **yes**, but under certain conditions.
 
 A restricted signing key is mainly used to produce attestations in the `TPMS_ATTEST`[^5] format.
 
