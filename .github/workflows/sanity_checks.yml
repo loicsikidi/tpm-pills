@@ -1,0 +1,28 @@
+name: Sanity Checks
+
+on:
+  schedule:
+    # Run twice a day (at 8:00 and 20:00 UTC)
+    - cron: '0 8,20 * * *'
+  pull_request:
+    branches: ["**"]
+  workflow_dispatch: # Allow manual triggering
+
+permissions:
+  contents: read
+
+jobs:
+  check-website:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check website accessibility
+        run: |
+          HTTP_STATUS=$(curl -o /dev/null -s -w "%{http_code}" https://tpmpills.com)
+          echo "HTTP Status: $HTTP_STATUS"
+
+          if [ "$HTTP_STATUS" -ne 200 ]; then
+            echo "Error: Website returned HTTP status $HTTP_STATUS instead of 200"
+            exit 1
+          fi
+
+          echo "Success: Website is accessible (HTTP 200)"
