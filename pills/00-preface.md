@@ -40,11 +40,11 @@ If you want to explore the topic further or if the `TPM Pills` approach simply d
 
 | Resource | Description | Format |
 | --- | --- | --- |
-| [A Practical Guide to TPM 2.0](https://link.springer.com/book/10.1007/978-1-4302-6584-9) | At the time of writing, the most comprehensive book on the subject (my bedside book)! <br><br>***Note: PDF format is free*** | Book |
-|  OST2 courses | <ul><li>[Trusted Computing 1101: Introductory Trusted Platform Module (TPM) Usage](https://ost2.fyi/TC1101)</li><li>[Trusted Computing 1102: Intermediate Trusted Platform Module (TPM) Usage](https://ost2.fyi/TC1102)</li></ul> ***Note: courses are free*** | Online course |
-| [TPM.dev tutorials](https://github.com/tpm2dev/tpm.dev.tutorials) | To share developer-friendly resources about Trusted Platform Modules (TPM) and hardware security, including other Hardware Security Modules (HSM). <br><br>*Note: description from the repo*  | Tutorials |
-| [TPM-JS by Google](https://github.com/tpm2dev/tpm.dev.tutorials) | TPM-JS lets you experiment with a software TPM device in your browser. It's an educational tool that teaches you how to use a TPM device to secure your workflows. <br><br>*Note: description from the repo*<br><br>***Warning: the repo is archived since 2022***  | Tutorials |
-| [TPMCourse by Nokia](https://github.com/nokia/TPMCourse) | A short course on getting started with understanding how a TPM 2.0 works. In this course we explain a number of the features of the TPM 2.0 through the TPM2_Tools through examples and, optionally, exercises.<br><br>*Note: description from the repo*  | Tutorials |
+| <a href="https://link.springer.com/book/10.1007/978-1-4302-6584-9" target="_blank">A Practical Guide to TPM 2.0</a> | At the time of writing, the most comprehensive book on the subject (my bedside book)! <br><br>***Note: PDF format is free*** | Book |
+|  OST2 courses | <ul><li><a href="https://ost2.fyi/TC1101" target="_blank">Trusted Computing 1101: Introductory Trusted Platform Module (TPM) Usage</a></li><li><a href="https://ost2.fyi/TC1102" target="_blank">Trusted Computing 1102: Intermediate Trusted Platform Module (TPM) Usage</a></li></ul> ***Note: courses are free*** | Online course |
+| <a href="https://github.com/tpm2dev/tpm.dev.tutorials" target="_blank">TPM.dev tutorials</a> | To share developer-friendly resources about Trusted Platform Modules (TPM) and hardware security, including other Hardware Security Modules (HSM). <br><br>*Note: description from the repo*  | Tutorials |
+| <a href="https://github.com/tpm2dev/tpm.dev.tutorials" target="_blank">TPM-JS by Google</a> | TPM-JS lets you experiment with a software TPM device in your browser. It's an educational tool that teaches you how to use a TPM device to secure your workflows. <br><br>*Note: description from the repo*<br><br>***Warning: the repo is archived since 2022***  | Tutorials |
+| <a href="https://github.com/nokia/TPMCourse" target="_blank">TPMCourse by Nokia</a> | A short course on getting started with understanding how a TPM 2.0 works. In this course we explain a number of the features of the TPM 2.0 through the TPM2_Tools through examples and, optionally, exercises.<br><br>*Note: description from the repo*  | Tutorials |
 
 <p align="center"><b>Table: </b><em>Educational Resources</em></p>
 
@@ -58,8 +58,8 @@ I'm far from being an expert on the subject, but I want to contribute to the dem
 
 🚧 `TPM Pills` is in **beta** 🚧
 
-* if you encounter problems 🙏 please report them on the [tpm-pills](https://github.com/loicsikidi/tpm-pills/issues) issue tracker
-* if you think that `TPM Pills` should cover a specific topic which isn't in the [roadmap](https://github.com/loicsikidi/tpm-pills/blob/main/ROADMAP.md), let's initiate a [discussion](https://github.com/loicsikidi/tpm-pills/discussions/new?category=ideas) 💬
+* if you encounter problems 🙏 please report them on the <a href="https://github.com/loicsikidi/tpm-pills/issues" target="_blank">tpm-pills</a> issue tracker
+* if you think that `TPM Pills` should cover a specific topic which isn't in the <a href="https://github.com/loicsikidi/tpm-pills/blob/main/ROADMAP.md" target="_blank">roadmap</a>, let's initiate a <a href="https://github.com/loicsikidi/tpm-pills/discussions/new?category=ideas" target="_blank">discussion</a> 💬
 
-[^1]: The specification available [here](https://trustedcomputinggroup.org/resource/tpm-library-specification) is a dense and relatively complex document.
+[^1]: The specification available <a href="https://trustedcomputinggroup.org/resource/tpm-library-specification" target="_blank">here</a> is a dense and relatively complex document.
 [^2]: Version 184 released on March 2025

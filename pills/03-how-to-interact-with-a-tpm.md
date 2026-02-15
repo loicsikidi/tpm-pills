@@ -6,7 +6,7 @@ It’s important to keep in mind that a TPM is primarily a **passive** device. B
 
 ![](./images/03-pill/basic-tpm-interaction.png)
 
-In the [previous pill](02-install-tooling.md#example-validate-tpms-version), we used the `TPM2_GetCapability` command to display the TPM version. This command is very useful because it provides a set of information about a TPM (static data) and its current state (dynamic data). The two libraries (*tpm2-tools and go-tpm*) that we used did more or less the same thing:
+In the <a href="https://tpmpills.com/02-install-tooling.html#example-validate-tpms-version" target="_blank">previous pill</a>, we used the `TPM2_GetCapability` command to display the TPM version. This command is very useful because it provides a set of information about a TPM (static data) and its current state (dynamic data). The two libraries (*tpm2-tools and go-tpm*) that we used did more or less the same thing:
 
 1. The library created the `TPM2_GetCapability` command in accordance with the specification  
 1. The command was sent to the TPM[^2]
@@ -32,7 +32,7 @@ Let’s take a closer look at the transmission part (steps 2 and 5), as this is 
 The device is usually named <code class="hljs">/dev/tpm0</code>.
 </div>
 
-As we saw in [pill #1](01-why-tpm-is-super-dope.md), a TPM is characterized by being resource-efficient, which is why it does not natively manage *multi-tenancy* when several applications need to communicate concurrently with it. To address this issue, the TCG produced a specification (*[TCG TSS 2.0 TAB and Resource Manager](https://trustedcomputinggroup.org/resource/tss-tab-and-resource-manager/)*) describing how to implement this logic.
+As we saw in <a href="https://tpmpills.com/01-why-tpm-is-super-dope.html" target="_blank">pill #1</a>, a TPM is characterized by being resource-efficient, which is why it does not natively manage *multi-tenancy* when several applications need to communicate concurrently with it. To address this issue, the TCG produced a specification (*<a href="https://trustedcomputinggroup.org/resource/tss-tab-and-resource-manager/" target="_blank">TCG TSS 2.0 TAB and Resource Manager</a>*) describing how to implement this logic.
 
 ![](./images/03-pill/resource-manager-diagram.png)
 
@@ -63,9 +63,9 @@ In most distributions, the *devices* dedicated to the TPM are owned by the `root
 
 <p align="center"><em>Screenshot from a NixOS Laptop</em></p>
 
-This has significant implications, as it requires your application to be run with *root* privileges—an unacceptable situation in many contexts (e.g., general public usage). By comparison, a Yubikey will ask the user to enter a PIN or press the device to unlock access to keys, without the underlying driver requiring `root` privileges. The concept of authorization exists on a TPM, so there’s fundamentally nothing preventing a *rootless* approach.
+This has significant implications, as it requires your application to be run with *root* privileges—an unacceptable situation in many contexts (e.g., general public usage). By comparison, a Yubikey will ask the user to enter a PIN or press the device to unlock access to keys, without the underlying driver requiring `root` privileges. The concept of authorization exists on a TPM, so there's fundamentally nothing preventing a *rootless* approach.
 
-Unfortunately, there is no consensus on the subject that would allow all applications to communicate with a TPM in a *rootless* manner. As of now, the ***hack*** consists of requiring the user to install [`tpm2-tss`](https://github.com/tpm2-software/tpm2-tss) in order to benefit from its [*udev rules*](https://github.com/tpm2-software/tpm2-tss/blob/b6fd5147a0618019af0d1d6d597492014354da3b/dist/tpm-udev.rules), which have become a sort of unofficial standard. Admittedly, this method is not ideal, for two reasons:
+Unfortunately, there is no consensus on the subject that would allow all applications to communicate with a TPM in a *rootless* manner. As of now, the ***hack*** consists of requiring the user to install <a href="https://github.com/tpm2-software/tpm2-tss" target="_blank">`tpm2-tss`</a> in order to benefit from its <a href="https://github.com/tpm2-software/tpm2-tss/blob/b6fd5147a0618019af0d1d6d597492014354da3b/dist/tpm-udev.rules" target="_blank">*udev rules*</a>, which have become a sort of unofficial standard. Admittedly, this method is not ideal, for two reasons:
 
 1. It installs a binary that might not even be used  
 2. `tpm2-tss` is not necessarily packaged on all distributions  
@@ -96,20 +96,20 @@ We’ve seen how to interact with a TPM locally, but is it possible to do so rem
 
 As an example, the TCP approach is the one used by many simulators such as:
 
-* [libtpms](https://github.com/stefanberger/libtpms)
-* [swtpm](https://github.com/stefanberger/swtpm)
-* [mssim](https://github.com/microsoft/ms-tpm-20-ref)
+* <a href="https://github.com/stefanberger/libtpms" target="_blank">libtpms</a>
+* <a href="https://github.com/stefanberger/swtpm" target="_blank">swtpm</a>
+* <a href="https://github.com/microsoft/ms-tpm-20-ref" target="_blank">mssim</a>
 
 The most important thing is to remember that this type of access exists. If your context requires it, keep in mind that establishing an encrypted channel is a prerequisite to prevent any *man-in-the-middle* attacks.
 
 ## Bonus: an exotic TPM
 
-It’s worth knowing that a TPM can also be located outside of a machine, for example... on a USB stick! That’s the rather wild idea proposed by [LetsTrust-TPM2Go](https://hackaday.io/project/193028-letstrust-tpm2go/details), offering a portable TPM. 
+It's worth knowing that a TPM can also be located outside of a machine, for example... on a USB stick! That's the rather wild idea proposed by <a href="https://hackaday.io/project/193028-letstrust-tpm2go/details" target="_blank">LetsTrust-TPM2Go</a>, offering a portable TPM.
 
 Technically, this is a TPM that responds to SPI (Serial Peripheral Interface) inputs; then, *libusb* is used to connect the USB device with the host.
 
 ![](./images/03-pill/ltt2go-diagram.png)
-*source: https://github.com/tpm2-software/tpm2-tss/blob/master/doc/tcti.md#tcti-spi-ltt2go*
+*source: <a href="https://github.com/tpm2-software/tpm2-tss/blob/master/doc/tcti.md#tcti-spi-ltt2go" target="_blank">https://github.com/tpm2-software/tpm2-tss/blob/master/doc/tcti.md#tcti-spi-ltt2go</a>*
 
 ## Acknowledgement
 
@@ -133,11 +133,11 @@ In this pill, we’ve seen how we can interact with a TPM and, most importantly,
 
 🚧 `TPM Pills` is in **beta** 🚧
 
-* if you encounter problems 🙏 please report them on the [tpm-pills](https://github.com/loicsikidi/tpm-pills/issues) issue tracker
-* if you think that `TPM Pills` should cover a specific topic which isn't in the [roadmap](https://github.com/loicsikidi/tpm-pills/blob/main/ROADMAP.md), let's initiate a [discussion](https://github.com/loicsikidi/tpm-pills/discussions/new?category=ideas) 💬
+* if you encounter problems 🙏 please report them on the <a href="https://github.com/loicsikidi/tpm-pills/issues" target="_blank">tpm-pills</a> issue tracker
+* if you think that `TPM Pills` should cover a specific topic which isn't in the <a href="https://github.com/loicsikidi/tpm-pills/blob/main/ROADMAP.md" target="_blank">roadmap</a>, let's initiate a <a href="https://github.com/loicsikidi/tpm-pills/discussions/new?category=ideas" target="_blank">discussion</a> 💬
 
-[^1]:  more precisely in [Part 3: Commands](https://trustedcomputinggroup.org/wp-content/uploads/Trusted-Platform-Module-2.0-Library-Part-3-Version-184_pub.pdf)
-[^2]: [here](https://trustedcomputinggroup.org/wp-content/uploads/Trusted-Platform-Module-2.0-Library-Part-3-Version-184_pub.pdf#page=313) in the spec
+[^1]:  more precisely in <a href="https://trustedcomputinggroup.org/wp-content/uploads/Trusted-Platform-Module-2.0-Library-Part-3-Version-184_pub.pdf" target="_blank">Part 3: Commands</a>
+[^2]: <a href="https://trustedcomputinggroup.org/wp-content/uploads/Trusted-Platform-Module-2.0-Library-Part-3-Version-184_pub.pdf#page=313" target="_blank">here</a> in the spec
 [^3]: released on July 2, 2017
 [^4]: Remote Procedure Call
-[^5]: these *"drivers"* are an implementation of the TPM Command Transmission Interface (TCTI). Please refer to this [document](https://github.com/tpm2-software/tpm2-tss/blob/master/doc/tcti.md#tcti-cmd) for more information.
+[^5]: these *"drivers"* are an implementation of the TPM Command Transmission Interface (TCTI). Please refer to this <a href="https://github.com/tpm2-software/tpm2-tss/blob/master/doc/tcti.md#tcti-cmd" target="_blank">document</a> for more information.
