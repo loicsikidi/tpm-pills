@@ -32,7 +32,7 @@ Let’s take a closer look at the transmission part (steps 2 and 5), as this is 
 The device is usually named <code class="hljs">/dev/tpm0</code>.
 </div>
 
-As we saw in <a href="01-why-tpm-is-super-dope.html" target="_blank">pill #1</a>, a TPM is characterized by being resource-efficient, which is why it does not natively manage *multi-tenancy* when several applications need to communicate concurrently with it. To address this issue, the TCG produced a specification (*<a href="https://trustedcomputinggroup.org/resource/tss-tab-and-resource-manager/" target="_blank">TCG TSS 2.0 TAB and Resource Manager</a>*) describing how to implement this logic.
+As we saw in <a href="https://tpmpills.com/01-why-tpm-is-super-dope.html" target="_blank">pill #1</a>, a TPM is characterized by being resource-efficient, which is why it does not natively manage *multi-tenancy* when several applications need to communicate concurrently with it. To address this issue, the TCG produced a specification (*<a href="https://trustedcomputinggroup.org/resource/tss-tab-and-resource-manager/" target="_blank">TCG TSS 2.0 TAB and Resource Manager</a>*) describing how to implement this logic.
 
 ![](./images/03-pill/resource-manager-diagram.png)
 
