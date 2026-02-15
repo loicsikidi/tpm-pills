@@ -297,7 +297,7 @@ This is by design: a primary key is <b>reproducible</b>.
 
 ### Bonus
 
-The file [04-pill/concepts_test.go](https://github.com/loicsikidi/tpm-pills/tree/main/examples/04-pill/concepts_test.go) includes unit tests that demonstrate key concepts from this pill, including **key reproducibility** and that **only storage keys can have children**.
+The file <a href="https://github.com/loicsikidi/tpm-pills/tree/main/examples/04-pill/concepts_test.go" target="_blank">04-pill/concepts_test.go</a> includes unit tests that demonstrate key concepts from this pill, including **key reproducibility** and that **only storage keys can have children**.
 
 Feel free to check it out if you’re curious.
 
@@ -322,12 +322,12 @@ Then, we applied these ideas in a practical example.
 
 🚧 `TPM Pills` is in **beta** 🚧
 
-* if you encounter problems 🙏 please report them on the [tpm-pills](https://github.com/loicsikidi/tpm-pills/issues) issue tracker
-* if you think that `TPM Pills` should cover a specific topic which isn't in the [roadmap](https://github.com/loicsikidi/tpm-pills/blob/main/ROADMAP.md), let's initiate a [discussion](https://github.com/loicsikidi/tpm-pills/discussions/new?category=ideas) 💬
+* if you encounter problems 🙏 please report them on the <a href="https://github.com/loicsikidi/tpm-pills/issues" target="_blank">tpm-pills</a> issue tracker
+* if you think that `TPM Pills` should cover a specific topic which isn't in the <a href="https://github.com/loicsikidi/tpm-pills/blob/main/ROADMAP.md" target="_blank">roadmap</a>, let's initiate a <a href="https://github.com/loicsikidi/tpm-pills/discussions/new?category=ideas" target="_blank">discussion</a> 💬
 
 [^1]: if you're familiar with the PKCS#11 protocol, a hierarchy is similar to the concept of a  `token`
 [^2]: with the exception of the NULL hierarchy
 [^3]: this refers to the OEM (Original Equipment Manufacturer)
 [^4]: also referred to as the *primary seed*
-[^5]: see the Wikipedia [article](https://en.wikipedia.org/wiki/Key_derivation_function)
+[^5]: see the Wikipedia <a href="https://en.wikipedia.org/wiki/Key_derivation_function" target="_blank">article</a>
 [^6]: it may have been generated elsewhere and then imported into the TPM

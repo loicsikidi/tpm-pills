@@ -175,7 +175,7 @@ signRsp, _ := tpm2.Sign{
 
 ### Deep dive: signing with a *restricted* key
 
-In the [previous pill](04-create-a-tpm-key.md#key-attributes), we introduced the concept of a *restricted* key. To recap, this property allows a key to sign or encrypt/decrypt TPM-internal objects. Now the question arises: *is it possible to sign external data with a restricted key?* The answer is **yes**, but under certain conditions.
+In the <a href="04-create-a-tpm-key.html#key-attributes" target="_blank">previous pill</a>, we introduced the concept of a *restricted* key. To recap, this property allows a key to sign or encrypt/decrypt TPM-internal objects. Now the question arises: *is it possible to sign external data with a restricted key?* The answer is **yes**, but under certain conditions.
 
 A restricted signing key is mainly used to produce attestations in the `TPMS_ATTEST`[^5] format.
 
@@ -262,13 +262,13 @@ In this pill, we explored how to perform cryptographic operations with an asymme
 
 🚧 `TPM Pills` is in **beta** 🚧
 
-* if you encounter problems 🙏 please report them on the [tpm-pills](https://github.com/loicsikidi/tpm-pills/issues) issue tracker
-* if you think that `TPM Pills` should cover a specific topic which isn't in the [roadmap](https://github.com/loicsikidi/tpm-pills/blob/main/ROADMAP.md), let's initiate a [discussion](https://github.com/loicsikidi/tpm-pills/discussions/new?category=ideas) 
+* if you encounter problems 🙏 please report them on the <a href="https://github.com/loicsikidi/tpm-pills/issues" target="_blank">tpm-pills</a> issue tracker
+* if you think that `TPM Pills` should cover a specific topic which isn't in the <a href="https://github.com/loicsikidi/tpm-pills/blob/main/ROADMAP.md" target="_blank">roadmap</a>, let's initiate a <a href="https://github.com/loicsikidi/tpm-pills/discussions/new?category=ideas" target="_blank">discussion</a>
 
 
-[^1]: see [Optimal asymmetric encryption padding article](https://en.wikipedia.org/wiki/Optimal_asymmetric_encryption_padding) on Wikipedia
-[^2]: see [hybrid cryptosystem article](https://en.wikipedia.org/wiki/Hybrid_cryptosystem) on Wikipedia
-[^3]: https://trustedcomputinggroup.org/wp-content/uploads/Trusted-Platform-Module-2.0-Library-Part-3-Version-184_pub.pdf#page=110
-[^4]: https://trustedcomputinggroup.org/wp-content/uploads/Trusted-Platform-Module-2.0-Library-Part-3-Version-184_pub.pdf#page=165
-[^5]: https://trustedcomputinggroup.org/wp-content/uploads/Trusted-Platform-Module-2.0-Library-Part-2-Version-184_pub.pdf#page=158
+[^1]: see <a href="https://en.wikipedia.org/wiki/Optimal_asymmetric_encryption_padding" target="_blank">Optimal asymmetric encryption padding article</a> on Wikipedia
+[^2]: see <a href="https://en.wikipedia.org/wiki/Hybrid_cryptosystem" target="_blank">hybrid cryptosystem article</a> on Wikipedia
+[^3]: <a href="https://trustedcomputinggroup.org/wp-content/uploads/Trusted-Platform-Module-2.0-Library-Part-3-Version-184_pub.pdf#page=110" target="_blank">https://trustedcomputinggroup.org/wp-content/uploads/Trusted-Platform-Module-2.0-Library-Part-3-Version-184_pub.pdf#page=110</a>
+[^4]: <a href="https://trustedcomputinggroup.org/wp-content/uploads/Trusted-Platform-Module-2.0-Library-Part-3-Version-184_pub.pdf#page=165" target="_blank">https://trustedcomputinggroup.org/wp-content/uploads/Trusted-Platform-Module-2.0-Library-Part-3-Version-184_pub.pdf#page=165</a>
+[^5]: <a href="https://trustedcomputinggroup.org/wp-content/uploads/Trusted-Platform-Module-2.0-Library-Part-2-Version-184_pub.pdf#page=158" target="_blank">https://trustedcomputinggroup.org/wp-content/uploads/Trusted-Platform-Module-2.0-Library-Part-2-Version-184_pub.pdf#page=158</a>
 [^6]: security note: if the payload to be hashed includes the `TPM_GENERATED_VALUE` header, the command will not return a ticket.

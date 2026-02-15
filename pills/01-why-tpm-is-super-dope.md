@@ -20,15 +20,15 @@ For example, this concept can be applied during a machine's *boot* process, wher
 
 ![](./images/01-pill/boot.png)
 
-These measurements could be stored in memory or on the *filesystem*, but that would allow a *malware* to alter them. Conversely, the TPM is a standalone component [^4] dedicated to this task and incapable of executing code from external sources (e.g. malware).  
+These measurements could be stored in memory or on the *filesystem*, but that would allow a *malware* to alter them. Conversely, the TPM is a standalone component [^4] dedicated to this task and incapable of executing code from external sources (e.g. malware).
 
-Similarly, a TPM solves the issue of storing a secret on disk. Historically, this problem was simply shifted, leading to the following situation: *« I will encrypt my secret with a symmetric key* 💡 *but where should I store this key?!* 🤯».  
+Similarly, a TPM solves the issue of storing a secret on disk. Historically, this problem was simply shifted, leading to the following situation: *« I will encrypt my secret with a symmetric key* 💡 *but where should I store this key?!* 🤯».
 
 Fortunately for us, the TPM elegantly solves this problem by providing the encryption key (which is not exportable).
 
 ![](./images/01-pill/seal_unseal.png)
 
-This type of principle is used, for example, by [BitLocker](https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/) or systemd (i.e.  [systemd-cryptenroll](https://www.freedesktop.org/software/systemd/man/latest/systemd-cryptenroll.html)).  
+This type of principle is used, for example, by <a href="https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/" target="_blank">BitLocker</a> or systemd (i.e.  <a href="https://www.freedesktop.org/software/systemd/man/latest/systemd-cryptenroll.html" target="_blank">systemd-cryptenroll</a>).  
 
 It is even possible to combine these two concepts and ensure that the `unseal` mechanism is only allowed **if the machine is in a trusted state**, thanks to integrity measurements. We will explore this in more depth in the upcoming *pills*, but this already gives you a glimpse of the vast capabilities provided by a TPM.
 
@@ -42,7 +42,7 @@ TCG has also produced other specs that revolve around TPMs.
 
 ## Different kinds of TPM
 
-***Note:** this section quotes content from [TPM 2.0: A Brief Introduction](https://trustedcomputinggroup.org/wp-content/uploads/TPM-2.0-A-Brief-Introduction.pdf) produced by TCG (Trusted Computing Group).*
+***Note:** this section quotes content from <a href="https://trustedcomputinggroup.org/wp-content/uploads/TPM-2.0-A-Brief-Introduction.pdf" target="_blank">TPM 2.0: A Brief Introduction</a> produced by TCG (Trusted Computing Group).*
 
 You need to have in mind that there are different kinds of TPMs, each with its own security level and cost. The choice of a TPM will depend on the security level required by the system and the budget allocated to it:
 
@@ -86,7 +86,7 @@ For the sake of impartiality, I must highlight the drawbacks inherent in using a
 
 ### What's about Apple devices?
 
-Contrary to Microsoft and Linux, Apple made the decision to use a proprietary solution called [Secure Enclave](https://support.apple.com/guide/security/sec59b0b31ff/web).
+Contrary to Microsoft and Linux, Apple made the decision to use a proprietary solution called <a href="https://support.apple.com/guide/security/sec59b0b31ff/web" target="_blank">Secure Enclave</a>.
 
 <div class="info">
 <b>Tip</b>
@@ -102,13 +102,13 @@ If you are a macOS user, you can still stay with us because most of the examples
 
 🚧 `TPM Pills` is in **beta** 🚧
 
-* if you encounter problems 🙏 please report them on the [tpm-pills](https://github.com/loicsikidi/tpm-pills/issues) issue tracker
-* if you think that `TPM Pills` should cover a specific topic which isn't in the [roadmap](https://github.com/loicsikidi/tpm-pills/blob/main/ROADMAP.md), let's initiate a [discussion](https://github.com/loicsikidi/tpm-pills/discussions/new?category=ideas) 💬
+* if you encounter problems 🙏 please report them on the <a href="https://github.com/loicsikidi/tpm-pills/issues" target="_blank">tpm-pills</a> issue tracker
+* if you think that `TPM Pills` should cover a specific topic which isn't in the <a href="https://github.com/loicsikidi/tpm-pills/blob/main/ROADMAP.md" target="_blank">roadmap</a>, let's initiate a <a href="https://github.com/loicsikidi/tpm-pills/discussions/new?category=ideas" target="_blank">discussion</a> 💬
 
 
-[^1]: Hardware Security Module (see more in [Wikipedia](https://en.wikipedia.org/wiki/Hardware_security_module))
-[^2]: see more in [Wikipedia](https://en.wikipedia.org/wiki/Smart_card)
+[^1]: Hardware Security Module (see more in <a href="https://en.wikipedia.org/wiki/Hardware_security_module" target="_blank">Wikipedia</a>)
+[^2]: see more in <a href="https://en.wikipedia.org/wiki/Smart_card" target="_blank">Wikipedia</a>
 [^3]: via a `Secure Boot` or a `Measured Boot`.
 [^4]: it has its own memory (RAM) and its own storage, although the resources are very limited.
-[^5]: [Window 11 - System requirements](https://www.microsoft.com/en-us/windows/windows-11-specifications?r=1#table1)
+[^5]: <a href="https://www.microsoft.com/en-us/windows/windows-11-specifications?r=1#table1" target="_blank">Window 11 - System requirements</a>
 [^6]: This decision by a tech giant led to a drop in TPM prices.
