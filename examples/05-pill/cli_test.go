@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/google/go-tpm/tpm2/transport/simulator"
+	"github.com/loicsikidi/go-tpm-kit/tpmtest"
 	"github.com/loicsikidi/tpm-pills/internal/options"
 	"github.com/stretchr/testify/require"
 )
@@ -15,12 +15,7 @@ import (
 // 2. Encrypt a message using the public key
 // 3. Decrypt the blob using the TPM key
 func TestEncryptDecryptWorkflow(t *testing.T) {
-	tpm, err := simulator.OpenSimulator()
-	require.NoError(t, err)
-	t.Cleanup(func() {
-		require.NoError(t, tpm.Close())
-	})
-
+	tpm := tpmtest.OpenSimulator(t)
 	tempDir := t.TempDir()
 	keyPath := filepath.Join(tempDir, "key.tpm")
 	publicKeyPath := filepath.Join(tempDir, "public.pem")
@@ -32,7 +27,7 @@ func TestEncryptDecryptWorkflow(t *testing.T) {
 		OutputDir: tempDir,
 		KeyType:   options.Decrypt.String(),
 	}
-	err = createCommand(tpm, createOpts)
+	err := createCommand(tpm, createOpts)
 	require.NoError(t, err)
 	require.FileExists(t, keyPath)
 	require.FileExists(t, publicKeyPath)
@@ -62,11 +57,7 @@ func TestEncryptDecryptWorkflow(t *testing.T) {
 // 2. Sign a message
 // 3. Verify the signature
 func TestSignVerifyWorkflow(t *testing.T) {
-	tpm, err := simulator.OpenSimulator()
-	require.NoError(t, err)
-	t.Cleanup(func() {
-		require.NoError(t, tpm.Close())
-	})
+	tpm := tpmtest.OpenSimulator(t)
 
 	tempDir := t.TempDir()
 	keyPath := filepath.Join(tempDir, "key.tpm")
@@ -79,7 +70,7 @@ func TestSignVerifyWorkflow(t *testing.T) {
 		OutputDir: tempDir,
 		KeyType:   options.Signer.String(),
 	}
-	err = createCommand(tpm, createOpts)
+	err := createCommand(tpm, createOpts)
 	require.NoError(t, err)
 	require.FileExists(t, keyPath)
 	require.FileExists(t, publicKeyPath)
@@ -114,11 +105,7 @@ func TestSignVerifyWorkflow(t *testing.T) {
 // 2. Sign a message (uses TPM2_Hash internally)
 // 3. Verify the signature
 func TestRestrictedSignerWorkflow(t *testing.T) {
-	tpm, err := simulator.OpenSimulator()
-	require.NoError(t, err)
-	t.Cleanup(func() {
-		require.NoError(t, tpm.Close())
-	})
+	tpm := tpmtest.OpenSimulator(t)
 
 	tempDir := t.TempDir()
 	keyPath := filepath.Join(tempDir, "key.tpm")
@@ -131,7 +118,7 @@ func TestRestrictedSignerWorkflow(t *testing.T) {
 		OutputDir: tempDir,
 		KeyType:   options.RestrictedSigner.String(),
 	}
-	err = createCommand(tpm, createOpts)
+	err := createCommand(tpm, createOpts)
 	require.NoError(t, err)
 	require.FileExists(t, keyPath)
 	require.FileExists(t, publicKeyPath)

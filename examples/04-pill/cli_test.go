@@ -4,7 +4,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/google/go-tpm/tpm2/transport/simulator"
+	"github.com/loicsikidi/go-tpm-kit/tpmtest"
 	"github.com/loicsikidi/tpm-pills/internal/options"
 	"github.com/stretchr/testify/require"
 )
@@ -13,11 +13,7 @@ import (
 // 1. Create a signing key
 // 2. Load the key back into the TPM
 func TestCreateLoadWorkflow(t *testing.T) {
-	tpm, err := simulator.OpenSimulator()
-	require.NoError(t, err)
-	t.Cleanup(func() {
-		require.NoError(t, tpm.Close())
-	})
+	tpm := tpmtest.OpenSimulator(t)
 
 	tempDir := t.TempDir()
 	keyPath := filepath.Join(tempDir, "key.tpm")
@@ -27,7 +23,7 @@ func TestCreateLoadWorkflow(t *testing.T) {
 		OutputDir: tempDir,
 		KeyType:   options.Signer.String(),
 	}
-	err = createCommand(tpm, createOpts)
+	err := createCommand(tpm, createOpts)
 	require.NoError(t, err)
 	require.FileExists(t, keyPath)
 

@@ -2,11 +2,10 @@ package main
 
 import (
 	"bytes"
-	"log"
 	"testing"
 
 	"github.com/google/go-tpm/tpm2"
-	"github.com/google/go-tpm/tpm2/transport/simulator"
+	"github.com/loicsikidi/go-tpm-kit/tpmtest"
 	"github.com/loicsikidi/tpm-pills/internal/tpmutil"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
@@ -14,11 +13,7 @@ import (
 
 // TestReproductability demonstrates that the primary key creation is reproducible
 func TestReproductability(t *testing.T) {
-	tpm, err := simulator.OpenSimulator()
-	if err != nil {
-		log.Fatalf("can't open tpm simulator: %v", err)
-	}
-	defer tpm.Close()
+	tpm := tpmtest.OpenSimulator(t)
 
 	firstPrimary, closer := setupCreatePrimary(t, tpm, tpm2.New2B(tpmutil.ECCSignerTemplate))
 	defer closer()
@@ -36,11 +31,7 @@ func TestReproductability(t *testing.T) {
 // TestCreate demonstrates that a non-storage parent can't create keys
 // and that a storage parent can create keys
 func TestCreate(t *testing.T) {
-	tpm, err := simulator.OpenSimulator()
-	if err != nil {
-		log.Fatalf("can't open tpm simulator: %v", err)
-	}
-	defer tpm.Close()
+	tpm := tpmtest.OpenSimulator(t)
 
 	// not allowed to create keys
 	signerPrimary, closer := setupCreatePrimary(t, tpm, tpm2.New2B(tpmutil.ECCSignerTemplate))
@@ -54,7 +45,7 @@ func TestCreate(t *testing.T) {
 		InPublic: tpm2.New2B(tpmutil.ECCSignerTemplate),
 	}
 
-	_, err = createCmd.Execute(tpm)
+	_, err := createCmd.Execute(tpm)
 	assert.Error(t, err, "Non-Storage Parent should not be able to create keys")
 
 	// allowed to create keys

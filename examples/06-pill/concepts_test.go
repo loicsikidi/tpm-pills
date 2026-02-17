@@ -5,10 +5,9 @@ import (
 	"testing"
 
 	"github.com/google/go-tpm/tpm2"
-	"github.com/google/go-tpm/tpm2/transport/simulator"
 	"github.com/loicsikidi/go-tpm-kit/tpmcrypto"
+	"github.com/loicsikidi/go-tpm-kit/tpmtest"
 	"github.com/loicsikidi/go-tpm-kit/tpmutil"
-	"github.com/stretchr/testify/require"
 )
 
 var (
@@ -36,11 +35,7 @@ var (
 
 // TestUnsealCreatePrimary tests the unsealing of data using a primary key.
 func TestUnsealCreatePrimary(t *testing.T) {
-	thetpm, err := simulator.OpenSimulator()
-	require.NoError(t, err)
-	t.Cleanup(func() {
-		require.NoError(t, thetpm.Close())
-	})
+	thetpm := tpmtest.OpenSimulator(t)
 
 	dataToSeal := []byte("secret")
 
@@ -95,11 +90,7 @@ func TestUnsealCreatePrimary(t *testing.T) {
 // The maximum size for sealed data is limited by MAX_SYM_DATA (128 bytes) in TPM 2.0,
 // which is consistent across all hash algorithms (SHA1, SHA256, SHA384, SHA512).
 func TestSealDataSizeLimits(t *testing.T) {
-	thetpm, err := simulator.OpenSimulator()
-	require.NoError(t, err)
-	t.Cleanup(func() {
-		require.NoError(t, thetpm.Close())
-	})
+	thetpm := tpmtest.OpenSimulator(t)
 
 	skrHandle, err := tpmutil.CreatePrimary(thetpm, tpmutil.CreatePrimaryConfig{
 		InPublic: tpmutil.ECCSRKTemplate,
@@ -165,11 +156,7 @@ func TestSealDataSizeLimits(t *testing.T) {
 
 // TestHMAC demonstrates how to create and use HMAC keys with different hash algorithms.
 func TestHMAC(t *testing.T) {
-	thetpm, err := simulator.OpenSimulator()
-	require.NoError(t, err)
-	t.Cleanup(func() {
-		require.NoError(t, thetpm.Close())
-	})
+	thetpm := tpmtest.OpenSimulator(t)
 
 	tests := []struct {
 		name     string
