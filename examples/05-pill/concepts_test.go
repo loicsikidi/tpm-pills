@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/google/go-tpm/tpm2"
-	"github.com/google/go-tpm/tpm2/transport/simulator"
+	"github.com/loicsikidi/go-tpm-kit/tpmtest"
 	"github.com/loicsikidi/tpm-pills/internal/tpmutil"
 )
 
@@ -17,11 +17,7 @@ func TestSignExternalDataWithRestrictedKey(t *testing.T) {
 
 	message := []byte("test message")
 
-	tpm, err := simulator.OpenSimulator()
-	if err != nil {
-		t.Fatalf("could not connect to TPM simulator: %v", err)
-	}
-	defer tpm.Close()
+	tpm := tpmtest.OpenSimulator(t)
 
 	tests := []struct {
 		name            string

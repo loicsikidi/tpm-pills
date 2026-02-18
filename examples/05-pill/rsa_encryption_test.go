@@ -12,13 +12,11 @@ import (
 	"testing"
 
 	"github.com/google/go-tpm/tpm2"
-	"github.com/google/go-tpm/tpm2/transport/simulator"
+	"github.com/loicsikidi/go-tpm-kit/tpmtest"
 	"github.com/loicsikidi/tpm-pills/internal/keyutil"
 	"github.com/loicsikidi/tpm-pills/internal/tpmutil"
 	"github.com/stretchr/testify/require"
 )
-
-var tag = flag.String("tag", "", "Tag to run specific tests")
 
 func TestMain(m *testing.M) {
 	flag.Parse()
@@ -26,16 +24,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestRSAOAEPDecryption(t *testing.T) {
-	tpm, err := simulator.OpenSimulator()
-	if err != nil {
-		t.Fatalf("could not connect to TPM simulator: %v", err)
-	}
-	t.Cleanup(func() {
-		if err := tpm.Close(); err != nil {
-			t.Errorf("%v", err)
-		}
-	})
-
+	tpm := tpmtest.OpenSimulator(t)
 	createPrimaryCmd := tpm2.CreatePrimary{
 		PrimaryHandle: tpm2.TPMRHOwner,
 		InPublic:      tpm2.New2B(tpm2.RSASRKTemplate),
@@ -121,15 +110,7 @@ func TestRSAOAEPDecryption(t *testing.T) {
 }
 
 func TestRSAOAEPDecryptionFailure(t *testing.T) {
-	tpm, err := simulator.OpenSimulator()
-	if err != nil {
-		t.Fatalf("could not connect to TPM simulator: %v", err)
-	}
-	t.Cleanup(func() {
-		if err := tpm.Close(); err != nil {
-			t.Errorf("%v", err)
-		}
-	})
+	tpm := tpmtest.OpenSimulator(t)
 
 	createPrimaryCmd := tpm2.CreatePrimary{
 		PrimaryHandle: tpm2.TPMRHOwner,
@@ -214,8 +195,8 @@ func TestRSAOAEPDecryptionFailure(t *testing.T) {
 }
 
 func TestOAEPKeySizeLimit(t *testing.T) {
-	if *tag != "all-tests" {
-		t.Skip("Test skipped: --tag=all-tests not provided")
+	if testing.Short() {
+		t.Skip("skipping test in short mode")
 	}
 
 	type args struct {

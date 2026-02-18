@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/google/go-tpm/tpm2"
-	"github.com/google/go-tpm/tpm2/transport/simulator"
+	"github.com/loicsikidi/go-tpm-kit/tpmtest"
 	"github.com/loicsikidi/tpm-pills/internal/tpmutil"
 )
 
@@ -57,11 +57,7 @@ func TestHashHierarchyWithRestrictedKey(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			tpm, err := simulator.OpenSimulator()
-			if err != nil {
-				t.Fatalf("could not connect to TPM simulator: %v", err)
-			}
-			defer tpm.Close()
+			tpm := tpmtest.OpenSimulator(t)
 
 			srkCreate, err := tpm2.CreatePrimary{
 				PrimaryHandle: tt.hierarchy,

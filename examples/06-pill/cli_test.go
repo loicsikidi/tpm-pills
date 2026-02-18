@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/google/go-tpm/tpm2/transport/simulator"
+	"github.com/loicsikidi/go-tpm-kit/tpmtest"
 	"github.com/loicsikidi/tpm-pills/internal/options"
 	"github.com/stretchr/testify/require"
 )
@@ -17,11 +17,7 @@ import (
 // 2. Encrypt a message
 // 3. Decrypt the blob
 func TestEncryptDecryptWorkflow(t *testing.T) {
-	tpm, err := simulator.OpenSimulator()
-	require.NoError(t, err)
-	t.Cleanup(func() {
-		require.NoError(t, tpm.Close())
-	})
+	tpm := tpmtest.OpenSimulator(t)
 
 	tempDir := t.TempDir()
 	keyPath := filepath.Join(tempDir, "key.tpm")
@@ -33,7 +29,7 @@ func TestEncryptDecryptWorkflow(t *testing.T) {
 		OutputDir: tempDir,
 		KeyType:   options.Decrypt.String(),
 	}
-	err = createCommand(tpm, createOpts)
+	err := createCommand(tpm, createOpts)
 	require.NoError(t, err)
 	require.FileExists(t, keyPath)
 
@@ -70,11 +66,7 @@ func TestEncryptDecryptWorkflow(t *testing.T) {
 // 1. Seal a message
 // 2. Unseal the message
 func TestSealUnsealWorkflow(t *testing.T) {
-	tpm, err := simulator.OpenSimulator()
-	require.NoError(t, err)
-	t.Cleanup(func() {
-		require.NoError(t, tpm.Close())
-	})
+	tpm := tpmtest.OpenSimulator(t)
 
 	tempDir := t.TempDir()
 	sealedPath := filepath.Join(tempDir, "sealed_key.tpm")
@@ -85,7 +77,7 @@ func TestSealUnsealWorkflow(t *testing.T) {
 		Message:        message,
 		OutputFilePath: sealedPath,
 	}
-	err = sealCommand(tpm, sealOpts)
+	err := sealCommand(tpm, sealOpts)
 	require.NoError(t, err)
 	require.FileExists(t, sealedPath)
 
@@ -101,11 +93,7 @@ func TestSealUnsealWorkflow(t *testing.T) {
 // TestHMACWorkflow tests the HMAC computation workflow:
 // 1. Compute HMAC
 func TestHMACWorkflow(t *testing.T) {
-	tpm, err := simulator.OpenSimulator()
-	require.NoError(t, err)
-	t.Cleanup(func() {
-		require.NoError(t, tpm.Close())
-	})
+	tpm := tpmtest.OpenSimulator(t)
 
 	data := "data to authenticate"
 
