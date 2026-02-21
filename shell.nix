@@ -15,6 +15,11 @@ let
     "https://github.com/loicsikidi/nix-shell-toolbox/tarball/main") {
     inherit pkgs;
     hooksConfig = {
+      gofmt.enable = false;
+      treefmt = {
+        enable = true;
+        stages = ["pre-push"];
+      };
       gotest.settings.flags = "-race";
       lychee = {
         settings.flags = "./pills"; # check only pills directory

@@ -23,6 +23,7 @@ const (
 	defaultSealedFileName    = "sealed_key.tpm"
 	defaultEncryptedFileName = "blob.enc"
 	defaultSignedFileName    = "message.sig"
+	defaultHandleStr         = "0x81000010"
 )
 
 var validKeyTypes = []KeyType{
@@ -303,6 +304,54 @@ type HMACOpts struct {
 func (o *HMACOpts) CheckAndSetDefaults() error {
 	if len(o.Data) == 0 {
 		return fmt.Errorf("invalid input: Data is required")
+	}
+	return nil
+}
+
+type PersistOpts struct {
+	Handle    string
+	OutputDir string
+}
+
+func (o *PersistOpts) CheckAndSetDefaults() error {
+	if o.Handle == "" {
+		o.Handle = defaultHandleStr
+	}
+	if o.OutputDir == "" {
+		dir, err := utils.FallbackDir()
+		if err != nil {
+			return err
+		}
+		o.OutputDir = dir
+	}
+	return nil
+}
+
+type ReadPersistedOpts struct {
+	Handle        string
+	PublicKeyPath string
+}
+
+func (o *ReadPersistedOpts) CheckAndSetDefaults() error {
+	if o.Handle == "" {
+		o.Handle = defaultHandleStr
+	}
+	if o.PublicKeyPath == "" {
+		return fmt.Errorf("invalid input: PublicKeyPath is required")
+	}
+	if !utils.FileExists(o.PublicKeyPath) {
+		return fmt.Errorf("invalid input: %s does not exist", o.PublicKeyPath)
+	}
+	return nil
+}
+
+type UnpersistOpts struct {
+	Handle string
+}
+
+func (o *UnpersistOpts) CheckAndSetDefaults() error {
+	if o.Handle == "" {
+		o.Handle = defaultHandleStr
 	}
 	return nil
 }
