@@ -8,6 +8,7 @@ src = "pills"
 additional-css = ["custom.css"]
 git-repository-url = "https://github.com/loicsikidi/tpm-pills"
 mathjax-support = true
+sidebar-header-nav = true
 
 [output.sitemap-generator]
 domain = "tpmpills.com"

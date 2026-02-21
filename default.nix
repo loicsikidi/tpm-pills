@@ -12,6 +12,8 @@ in
       buildPhase = ''
         runHook preBuild
 
+        echo "mdbook version: $(mdbook --version)"
+
         mdbook build
 
         runHook postBuild
