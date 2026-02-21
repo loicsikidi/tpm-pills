@@ -31,7 +31,7 @@ This example requires `swtpm` installed on your running system. Read [pill #2](h
 go run github.com/loicsikidi/tpm-pills/examples/05-pill create --type decrypt
 
 # Encrypt a blob using the public key
-go run github.com/loicsikidi/tpm-pills/examples/05-pill encrypt --key ./public.pem --message 'Hello TPM Pills!' --output ./blob.enc
+go run github.com/loicsikidi/tpm-pills/examples/05-pill encrypt --pubkey ./public.pem --message 'Hello TPM Pills!' --output ./blob.enc
 
 # Alternatively, you can use the `openssl` command to encrypt the blob
 openssl pkeyutl -encrypt -in <(echo -n 'Hello TPM Pills!') -out ./blob.enc -pubin -inkey public.pem -pkeyopt rsa_padding_mode:oaep -pkeyopt rsa_oaep_md:sha256
@@ -61,7 +61,7 @@ go run github.com/loicsikidi/tpm-pills/examples/05-pill sign --key ./key.tpm --m
 # output: Signature saved to ./message.sig 🚀
 
 # Verify the signature using the public key
-go run github.com/loicsikidi/tpm-pills/examples/05-pill verify --key ./public.pem --signature ./message.sig --message 'Hello TPM Pills!'
+go run github.com/loicsikidi/tpm-pills/examples/05-pill verify --pubkey ./public.pem --signature ./message.sig --message 'Hello TPM Pills!'
 # output: Signature verified successfully 🚀
 
 # Alternatively, you can use the `openssl` command to verify the signature
@@ -90,7 +90,7 @@ go run github.com/loicsikidi/tpm-pills/examples/05-pill sign --key ./key.tpm --m
 # output: Signature saved to ./message.sig 🚀
 
 # Verify the signature using the public key
-go run github.com/loicsikidi/tpm-pills/examples/05-pill verify --key ./public.pem --signature ./message.sig --message 'Hello TPM Pills!'
+go run github.com/loicsikidi/tpm-pills/examples/05-pill verify --pubkey ./public.pem --signature ./message.sig --message 'Hello TPM Pills!'
 # output: Signature verified successfully 🚀
 
 # Alternatively, you can use the `openssl` command to verify the signature

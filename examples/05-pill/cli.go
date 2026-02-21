@@ -48,7 +48,7 @@ func run() error {
 	createCmd.BoolVar(&useTPM, "use-real-tpm", false, "Use real TPM instead of swtpm")
 
 	// Define flags for the encrypt subcommand
-	encryptCmd.StringVar(&encryptOpts.PublicKeyPath, "key", "", "Path to the public key file")
+	encryptCmd.StringVar(&encryptOpts.PublicKeyPath, "pubkey", "", "Path to the public key file")
 	encryptCmd.StringVar(&encryptOpts.Message, "message", "", "Message to encrypt")
 	encryptCmd.StringVar(&encryptOpts.OutputFilePath, "output", "", "Output file for the encrypted message")
 	encryptCmd.BoolVar(&useTPM, "use-real-tpm", false, "Use real TPM instead of swtpm")
@@ -65,7 +65,7 @@ func run() error {
 	signCmd.BoolVar(&useTPM, "use-real-tpm", false, "Use real TPM instead of swtpm")
 
 	// Define flags for the verify subcommand
-	verifyCmd.StringVar(&verifyOpts.PublicKeyPath, "key", "", "Path to the public key file")
+	verifyCmd.StringVar(&verifyOpts.PublicKeyPath, "pubkey", "", "Path to the public key file")
 	verifyCmd.StringVar(&verifyOpts.Message, "message", "", "Message to verify")
 	verifyCmd.StringVar(&verifyOpts.SignaturePath, "signature", "", "Path to the signature file")
 	verifyCmd.BoolVar(&useTPM, "use-real-tpm", false, "Use real TPM instead of swtpm")

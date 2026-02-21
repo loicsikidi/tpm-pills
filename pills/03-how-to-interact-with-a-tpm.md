@@ -118,7 +118,11 @@ This pill is derived from Trusted Computing 1101: Introductory Trusted Platform 
 <div class="info">
 <b>Info</b>
 
-To be precise, the term "passive device" was taken from this content (which I recommend), the rest is original.
+To be precise, I take 2 elements from this content:
+1. the term "passive device"
+2. the discovery of the existence of `LetsTrust-TPM2Go`
+
+The rest of the pill is original content.
 </div>
 
 ## Conclusion

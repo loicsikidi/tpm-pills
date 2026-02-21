@@ -64,7 +64,7 @@ Now, let’s encrypt a message using the public key:
 
 ```bash
 # Encrypt a blob using the public key
-go run github.com/loicsikidi/tpm-pills/examples/05-pill encrypt --key ./public.pem \
+go run github.com/loicsikidi/tpm-pills/examples/05-pill encrypt --pubkey ./public.pem \
 --message 'Hello TPM Pills!' --output ./blob.enc
 # output: Encrypted message saved to ./blob.enc 🚀
 
@@ -142,7 +142,7 @@ go run github.com/loicsikidi/tpm-pills/examples/05-pill sign --key ./key.tpm \
 --message 'Hello TPM Pills!' --output ./message.sig
 # output: Signature saved to ./message.sig 🚀
 
-go run github.com/loicsikidi/tpm-pills/examples/05-pill verify --key ./public.pem \
+go run github.com/loicsikidi/tpm-pills/examples/05-pill verify --pubkey ./public.pem \
 --signature ./message.sig --message 'Hello TPM Pills!'
 # output: Signature verified successfully 🚀
 
@@ -237,7 +237,7 @@ go run github.com/loicsikidi/tpm-pills/examples/05-pill sign --key ./key.tpm \
 # output: Signature saved to ./message.sig 🚀
 
 # Verify the signature using the public key
-go run github.com/loicsikidi/tpm-pills/examples/05-pill verify --key ./public.pem \
+go run github.com/loicsikidi/tpm-pills/examples/05-pill verify --pubkey ./public.pem \
 --signature ./message.sig --message 'Hello TPM Pills!'
 # output: Signature verified successfully 🚀
 
