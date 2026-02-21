@@ -5,7 +5,7 @@ go 1.24.0
 require (
 	github.com/foxboron/swtpm_test v0.0.0-20230726224112-46aaafdf7006
 	github.com/google/go-tpm v0.9.8
-	github.com/loicsikidi/go-tpm-kit v0.5.1-0.20260201191359-46d5433bdf06
+	github.com/loicsikidi/go-tpm-kit v0.5.1-0.20260219215753-aec6ad519b7a
 	github.com/stretchr/testify v1.11.1
 )
 
