@@ -27,7 +27,7 @@ Please find below the different fields associated with the publicArea:
 | unique | the unique identifier of the structure. For an asymmetric key, this would be the public key |
 <p align="center"><b>Table: </b><em>publicArea fields</em></p>
 
-<p align="center">Source: <a href="https://trustedcomputinggroup.org/wp-content/uploads/Trusted-Platform-Module-2.0-Library-Part-2-Version-184_pub.pdf#page=186" target="_blank">section 12.2.4, Part 2, v184 TPM 2.0</a></p>.
+<p align="center">Source: <a href="https://trustedcomputinggroup.org/wp-content/uploads/Trusted-Platform-Module-2.0-Library-Part-2-Version-184_pub.pdf#page=186" target="_blank">section 12.2.4, Part 2, v184 TPM 2.0</a></p>
 
 The important thing here is not to understand the purpose of each field but rather to keep in mind:
 
