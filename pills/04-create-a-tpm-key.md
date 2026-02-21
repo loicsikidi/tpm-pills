@@ -153,7 +153,7 @@ In the spec, this kind of key is also called a <em>Storage Parent</em>.
 Now that we’ve covered the main ideas, let’s get hands-on!
 
 <div class="warning">
-<b>Goals</b> </br>
+<b>Goals</b>
 
 1. Create an ECC NIST P256 ordinary key (requires creating a primary key first)
 2. Store the key on the filesystem
@@ -295,7 +295,7 @@ The output of  <code class="hljs">TPM2_CreatePrimary</code> doesn’t include a 
 This is by design: a primary key is <b>reproducible</b>.
 </div>
 
-### Bonus
+## Bonus
 
 The file <a href="https://github.com/loicsikidi/tpm-pills/tree/main/examples/04-pill/concepts_test.go" target="_blank">04-pill/concepts_test.go</a> includes unit tests that demonstrate key concepts from this pill, including **key reproducibility** and that **only storage keys can have children**.
 
