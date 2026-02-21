@@ -1,9 +1,9 @@
 let
-  # mdbook pinned to 0.4.52
+  # mdbook pinned to 0.5.2
   # go to https://www.nixhub.io/packages/mdbook to the list of available versions
   nixpkgs =
     fetchTarball
-    "https://github.com/NixOS/nixpkgs/archive/ee09932cedcef15aaf476f9343d1dea2cb77e261.tar.gz";
+    "https://github.com/NixOS/nixpkgs/archive/8482c7ded03bae7550f3d69884f1e611e3bd19e8.tar.gz";
   pkgs = import nixpkgs {
     config = {};
     overlays = [];
