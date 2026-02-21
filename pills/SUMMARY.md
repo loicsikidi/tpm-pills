@@ -8,3 +8,4 @@
 - [Create a TPM key](04-create-a-tpm-key.md)
 - [Perform cryptographic operations with asymmetric keys](05-perform-crypto-with-asymmetric-keys.md)
 - [Perform cryptographic operations with symmetric keys](06-perform-crypto-with-symmetric-keys.md)
+- [Name and Handle: a way to identify a key](07-name-and-handle.md)
