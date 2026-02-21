@@ -289,7 +289,7 @@ If you're interested in the subject, I recommend taking a look at the <a href="h
 
 You probably noticed that this pill mentions several repos belonging to <a href="https://github.com/salrashid123" target="_blank">salrashid123</a> who is a person whose contributions on TPM usage are invaluable.
 
-Shout-out to him!
+Make sure to check out his work!
 
 ## Bonus
 
