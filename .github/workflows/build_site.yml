@@ -9,6 +9,7 @@ on:
       - 'pills/**'
       - 'book.toml'
       - 'custom.css'
+      - 'nix/pkgs/mdbook-sitemap-generator.nix'
   schedule:
     - cron: '0 12 * * 6' # every saturday at noon (UTC)
   workflow_dispatch: # allow to trigger the workflow manually
