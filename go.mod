@@ -1,6 +1,6 @@
 module github.com/loicsikidi/tpm-pills
 
-go 1.24.0
+go 1.25.0
 
 require (
 	github.com/foxboron/swtpm_test v0.0.0-20230726224112-46aaafdf7006
