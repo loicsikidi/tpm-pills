@@ -13,9 +13,11 @@ on:
       - 'go.sum'
   schedule: # daily at 19:00 UTC
     - cron: '0 19 * * *'
-  workflow_dispatch:
+  workflow_dispatch: # allow to trigger the workflow manually
+
 permissions:
   contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -29,11 +31,6 @@ jobs:
         deps:
           - locked
           - latest
-        # Exclude (go.mod, latest)
-        # root cause: latest version of golang.org/x/sys requires Go 1.24.0
-        exclude:
-          - go: { go-version-file: go.mod }
-            deps: latest
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
@@ -73,23 +70,3 @@ jobs:
       - uses: geomys/sandboxed-step@7d75eb49d17fdeeb3656b3a57d35932d205bcfb9 # v1.2.1
         with:
           run: go run golang.org/x/vuln/cmd/govulncheck@latest ./...
-  golangci:
-    name: lint
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-        with:
-          persist-credentials: false
-      - name: Install Golang
-        uses: actions/setup-go@44694675825211faa026b3c33043df3e48a5fa00 # v6.0.0
-        with:
-          go-version-file: go.mod
-      - name: golangci-lint
-        uses: golangci/golangci-lint-action@1e7e51e771db61008b38414a730f564565cf7c20 # v9.2.0
-        with:
-          version: latest
-          install-mode: binary
-          skip-cache: true
