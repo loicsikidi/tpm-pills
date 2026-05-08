@@ -4,14 +4,14 @@
 }:
 buildGoModule rec {
   pname = "mdbook-sitemap-generator";
-  version = "1.2.2";
+  version = "1.3.0";
 
   src = fetchFromGitHub {
     owner = "loicsikidi";
     repo = "mdbook-sitemap-generator";
     tag = "v${version}";
-    hash = "sha256-FZ8tfIvosu6L0jWex/uyg+w6QYYxyBSqYWsqu2low+0=";
+    hash = "sha256-rzcXmFqFw4qo1knp9+IRwBGf+Yh5zVr+YX7d7jnFKB4=";
   };
 
-  vendorHash = "sha256-cEgvwog50izBOyMlCdLI2KvwSHPKZsp1wSw6a59V1yw=";
+  vendorHash = "sha256-5uDi/9YlUNRDQKFROlN8sLvLRFFOvZvZHcmR6fARG5Q=";
 }
