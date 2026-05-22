@@ -1,4 +1,4 @@
-# TPM Pills
+![Banner](./static/banner.svg)
 
 Content and examples for [TPM Pills](https://tpmpills.com), a site that introduces *Trusted Platform Modules* (TPM) with a series of short articles.
 
