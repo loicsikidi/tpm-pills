@@ -10,7 +10,7 @@ buildGoModule rec {
     owner = "loicsikidi";
     repo = "mdbook-sitemap-generator";
     tag = "v${version}";
-    hash = "sha256-rzcXmFqFw4qo1knp9+IRwBGf+Yh5zVr+YX7d7jnFKB4=";
+    hash = "sha256-DNFdHQpvL6BaFMk0LVBkTB5eX93cUXEeKueTBoFIO8o=";
   };
 
   vendorHash = "sha256-5uDi/9YlUNRDQKFROlN8sLvLRFFOvZvZHcmR6fARG5Q=";
